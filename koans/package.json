@@ -1,0 +1,14 @@
+{
+  "name": "typescript-koans-student",
+  "version": "1.0.0",
+  "description": "Learn TypeScript by fixing failing tests",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node lib/path-to-enlightenment.js",
+    "clean": "rm -rf lib"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.0.0"
+  }
+}
