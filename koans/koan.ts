@@ -39,7 +39,7 @@ export abstract class Koan {
   }
 
   protected assertEqual<T>(expected: T, actual: T, message?: string): void {
-    if (expected !== actual) {
+    if (!this.deepEqual(expected, actual)) {
       const msg =
         message ||
         `Expected ${JSON.stringify(expected)}, but got ${JSON.stringify(
@@ -47,6 +47,35 @@ export abstract class Koan {
         )}`;
       throw new AssertionError(msg, expected, actual);
     }
+  }
+
+  // Deep equality comparison for arrays and objects
+  private deepEqual(a: any, b: any): boolean {
+    if (a === b) return true;
+
+    if (a == null || b == null) return a === b;
+
+    if (Array.isArray(a) && Array.isArray(b)) {
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i++) {
+        if (!this.deepEqual(a[i], b[i])) return false;
+      }
+      return true;
+    }
+
+    if (typeof a === "object" && typeof b === "object") {
+      const keysA = Object.keys(a);
+      const keysB = Object.keys(b);
+      if (keysA.length !== keysB.length) return false;
+
+      for (const key of keysA) {
+        if (!keysB.includes(key)) return false;
+        if (!this.deepEqual(a[key], b[key])) return false;
+      }
+      return true;
+    }
+
+    return false;
   }
 
   protected assertNotEqual<T>(expected: T, actual: T, message?: string): void {
