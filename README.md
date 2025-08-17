@@ -18,6 +18,7 @@ The koans are broken out into areas by file:
 - `about-enums-unions.ts` - Enums, union types, and discriminated unions
 - `about-generics.ts` - Generic functions, classes, and utility types
 - `about-async-await.ts` - Promises, async/await, and asynchronous programming
+- `about-advanced-types.ts` - **NEW!** Advanced TypeScript features and type-level programming
 
 They are presented in order in the `path-to-enlightenment.ts` file.
 
@@ -104,7 +105,7 @@ Assertion failed
 Please meditate on the following code:
 about-asserts.ts
 
-Your path thus far [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0/68 (0%)
+Your path thus far [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0/94 (0%)
 
 "Mountains are merely mountains" 🏔️
 ```
@@ -196,6 +197,16 @@ By completing these koans, you'll gain understanding of:
 - Utility types (`Partial`, `Pick`, `Omit`)
 - Conditional and mapped types
 - Type constraints and inference
+
+### **NEW!** Expert-Level TypeScript
+- Template literal types and string manipulation
+- Recursive types for complex data structures
+- The `infer` keyword and advanced type inference
+- Branded types for type-safe primitives
+- Function overloads and abstract classes
+- Module augmentation and mixins
+- Index signatures and key remapping
+- Distributive conditional types
 
 ### Best Practices
 - Test-driven development

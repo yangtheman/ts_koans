@@ -12,6 +12,7 @@ import { AboutInterfaces } from "./about-interfaces";
 import { AboutEnumsAndUnions } from "./about-enums-unions";
 import { AboutGenerics } from "./about-generics";
 import { AboutAsyncAwait } from "./about-async-await";
+import { AboutAdvancedTypes } from "./about-advanced-types";
 
 // The path to TypeScript enlightenment starts with the following:
 const koansInOrder: Array<new () => Koan> = [
@@ -26,6 +27,7 @@ const koansInOrder: Array<new () => Koan> = [
   AboutEnumsAndUnions,
   AboutGenerics,
   AboutAsyncAwait,
+  AboutAdvancedTypes,
 ];
 
 export class PathToEnlightenment {

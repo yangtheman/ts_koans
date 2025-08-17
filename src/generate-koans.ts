@@ -69,6 +69,11 @@ export class KoanGenerator {
       destPath: "koans/about-async-await.ts",
     },
     {
+      name: "about-advanced-types.ts",
+      sourcePath: "src/about-advanced-types.ts",
+      destPath: "koans/about-advanced-types.ts",
+    },
+    {
       name: "path-to-enlightenment.ts",
       sourcePath: "src/path-to-enlightenment.ts",
       destPath: "koans/path-to-enlightenment.ts",
