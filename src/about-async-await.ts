@@ -66,7 +66,7 @@ export class AboutAsyncAwait extends Koan {
   // Example: Both resolved and rejected promises are still Promise objects
   test_promise_states(): void {
     const resolved = Promise.resolve("success");
-    const rejected = Promise.reject("error");
+    const rejected = Promise.reject("error").catch(() => "handled error");
 
     // Promises have three states: pending, fulfilled (resolved), rejected
     this.assertEqual("Promise", resolved.constructor.name);
@@ -191,7 +191,7 @@ export class AboutAsyncAwait extends Koan {
 
     // In real code, you'd use try/catch or .catch()
     const successPromise = mightFail(false);
-    const failPromise = mightFail(true);
+    const failPromise = mightFail(true).catch(() => "caught error");
 
     this.assertEqual(this.___(), successPromise.constructor.name); // Fill in the blank
     this.assertEqual("Promise", failPromise.constructor.name);
