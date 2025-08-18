@@ -35,6 +35,19 @@ jspm_packages/
 # TypeScript cache
 *.tsbuildinfo
 
+# TypeScript incremental compilation
+*.tsbuildinfo
+**/src/*.js
+**/src/*.js.map
+**/koans/*.js
+**/koans/*.js.map
+
+# Jest coverage and testing
+coverage/
+**/coverage/
+.nyc_output
+**/.nyc_output
+
 # Optional npm cache directory
 .npm
 
@@ -102,23 +115,54 @@ Thumbs.db
 .vscode/settings.json
 .vscode/launch.json
 .vscode/extensions.json
+.vscode/tasks.json
 .idea/
 *.swp
 *.swo
 *~
 
+# But keep some VS Code config files that might be useful for the project
+!.vscode/recommended-extensions.json
+!.vscode/settings.example.json
+
 # Compiled JavaScript output
 lib/
+*/lib/
+**/lib/
 
 # Generated student koans - keep the TypeScript files but ignore build artifacts
 # koans/ - commented out because we want to track the generated koan files
 koans/lib/
 koans/node_modules/
+*/koans/lib/
+**/koans/lib/
+
+# Node modules in all subdirectories
+*/node_modules/
+**/node_modules/
+
+# Yarn lock files in subdirectories (keep root yarn.lock)
+*/yarn.lock
+**/yarn.lock
 
 # Backup files
 *.backup
 *.bak
 *.tmp
+
+# Development and debugging files
+*.log.*
+debug.log
+error.log
+*.debug
+.eslintcache
+**/.eslintcache
+
+# OS and editor specific files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+**/Thumbs.db
 
 # Build artifacts
 build/
@@ -130,8 +174,10 @@ dist/
 .env.test.local
 .env.production.local
 
-# Package manager lock files (keep yarn.lock, ignore others)
+# Package manager lock files (keep root yarn.lock, ignore others)
 package-lock.json
+*/package-lock.json
+**/package-lock.json
 
 # macOS specific
 .AppleDouble
