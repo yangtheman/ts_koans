@@ -2,8 +2,6 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "outDir": "./lib",
-    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -12,6 +10,7 @@
     "sourceMap": false,
     "removeComments": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "lib", "koans"]
+  "include": [],
+  "exclude": ["node_modules", "lib", "basic_koans", "advanced_koans"],
+  "compileOnSave": false
 }
