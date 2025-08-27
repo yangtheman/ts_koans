@@ -144,23 +144,23 @@ export class KoanGenerator {
 
     // Convert assertion values to placeholders - be more specific to avoid constructor calls
     // Only replace values in this.assertEqual() calls, not in constructor calls or other contexts
-    
+
     // Pattern: this.assertEqual(number, variable) -> this.assertEqual(this.__(), variable)
     processed = processed.replace(
-      /this\.assertEqual\((\d+),\s*([^)]+)\);/g, 
-      'this.assertEqual(this.___(), $2);'
+      /this\.assertEqual\((\d+),\s*([^)]+)\);/g,
+      "this.assertEqual(this.___(), $2);"
     );
-    
-    // Pattern: this.assertEqual("string", variable) -> this.assertEqual(this.__(), variable)  
+
+    // Pattern: this.assertEqual("string", variable) -> this.assertEqual(this.__(), variable)
     processed = processed.replace(
       /this\.assertEqual\("([^"]*)",\s*([^)]+)\);/g,
-      'this.assertEqual(this.___(), $2);'
+      "this.assertEqual(this.___(), $2);"
     );
-    
+
     // Pattern: this.assertEqual(true/false, variable) -> this.assertEqual(this.__(), variable)
     processed = processed.replace(
       /this\.assertEqual\((true|false),\s*([^)]+)\);/g,
-      'this.assertEqual(this.___(), $2);'
+      "this.assertEqual(this.___(), $2);"
     );
 
     // Keep the placeholder methods intact
