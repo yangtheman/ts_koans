@@ -14,11 +14,6 @@ export class KoanGenerator {
   private koanFiles: KoanFile[] = [
     { name: "koan.ts", sourcePath: "src/koan.ts", destPath: "koans/koan.ts" },
     {
-      name: "about-asserts.ts",
-      sourcePath: "src/about-asserts.ts",
-      destPath: "koans/about-asserts.ts",
-    },
-    {
       name: "about-types.ts",
       sourcePath: "src/about-types.ts",
       destPath: "koans/about-types.ts",
@@ -146,6 +141,27 @@ export class KoanGenerator {
       "// Fill in the blank"
     );
     processed = processed.replace(/\/\/ Is .+\?$/gm, "// Fill in the blank");
+
+    // Convert assertion values to placeholders - be more specific to avoid constructor calls
+    // Only replace values in this.assertEqual() calls, not in constructor calls or other contexts
+    
+    // Pattern: this.assertEqual(number, variable) -> this.assertEqual(this.__(), variable)
+    processed = processed.replace(
+      /this\.assertEqual\((\d+),\s*([^)]+)\);/g, 
+      'this.assertEqual(this.___(), $2);'
+    );
+    
+    // Pattern: this.assertEqual("string", variable) -> this.assertEqual(this.__(), variable)  
+    processed = processed.replace(
+      /this\.assertEqual\("([^"]*)",\s*([^)]+)\);/g,
+      'this.assertEqual(this.___(), $2);'
+    );
+    
+    // Pattern: this.assertEqual(true/false, variable) -> this.assertEqual(this.__(), variable)
+    processed = processed.replace(
+      /this\.assertEqual\((true|false),\s*([^)]+)\);/g,
+      'this.assertEqual(this.___(), $2);'
+    );
 
     // Keep the placeholder methods intact
     // this.__() and this.___() should remain as-is for students to replace

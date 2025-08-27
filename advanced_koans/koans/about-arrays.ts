@@ -52,26 +52,26 @@ export class AboutArrays extends Koan {
     const rangeArray = Array.from({ length: 5 }, (_, i) => i); // [0, 1, 2, 3, 4]
     const mappedArray = Array.from("hello"); // ['h', 'e', 'l', 'l', 'o']
 
-    this.assertEqual(5, numbers.length);
+    this.assertEqual(this.___(), numbers.length);
     this.assertEqual(this.___(), strings[1]);
-    this.assertEqual("age", mixed[0]);
+    this.assertEqual(this.___(), mixed[0]);
     this.assertEqual(this.__(), mixed[1]);
 
-    this.assertEqual(10, coordinate[0]);
+    this.assertEqual(this.___(), coordinate[0]);
     this.assertEqual(this.___(), coordinate[1]);
-    this.assertEqual("Alice", person[0]);
+    this.assertEqual(this.___(), person[0]);
     this.assertEqual(this.___(), person[2]);
 
-    this.assertEqual(5, rangeArray.length);
-    this.assertEqual(2, rangeArray[2]);
+    this.assertEqual(this.___(), rangeArray.length);
+    this.assertEqual(this.___(), rangeArray[2]);
     this.assertEqual(this.___(), mappedArray.length);
-    this.assertEqual("h", mappedArray[0]);
+    this.assertEqual(this.___(), mappedArray[0]);
 
     // Type inference demonstration
     const inferredNumbers = [1, 2, 3]; // inferred as number[]
     const inferredMixed = [1, "two", true]; // inferred as (string | number | boolean)[]
 
-    this.assertEqual("number", typeof inferredNumbers[0]);
+    this.assertEqual(this.___(), typeof inferredNumbers[0]);
     this.assertEqual(this.___(), typeof inferredMixed[1]);
   }
 
@@ -140,7 +140,7 @@ export class AboutArrays extends Koan {
     const spreadResult = [...nums1, ...nums2, ...nums3];
     const mixedMerge = [0, ...nums1, 10, ...nums2];
 
-    this.assertEqual(9, concatResult.length);
+    this.assertEqual(this.___(), concatResult.length);
     this.assertEqual(concatResult, spreadResult);
     this.assertEqual([0, 1, 2, 3, 10, 4, 5, 6], mixedMerge);
     this.assertEqual(this.___(), mixedMerge[4]); // Element at index 4
@@ -150,10 +150,10 @@ export class AboutArrays extends Koan {
     const [, , third] = originalArray; // Skip first two elements
     const [head, ...tail] = originalArray;
 
-    this.assertEqual(1, first);
+    this.assertEqual(this.___(), first);
     this.assertEqual(this.___(), second);
     this.assertEqual([3, 4, 5], rest);
-    this.assertEqual(3, third);
+    this.assertEqual(this.___(), third);
     this.assertEqual(this.___(), tail.length);
 
     // Advanced slicing with negative indices
@@ -166,7 +166,7 @@ export class AboutArrays extends Koan {
     this.assertEqual(["b", "c", "d", "e", "f"], withoutFirst);
     this.assertEqual(this.___(), withoutLast);
     this.assertEqual(["b", "c", "d", "e"], withoutFirstAndLast);
-    this.assertEqual("f", reverseSlice[0]);
+    this.assertEqual(this.___(), reverseSlice[0]);
     this.assertEqual(this.___(), reverseSlice[5]);
   }
 
@@ -221,7 +221,7 @@ export class AboutArrays extends Koan {
     this.assertEqual([2, 4, 6, 8, 10], doubled.slice(0, 5));
     this.assertEqual([1, 4, 9, 16, 25], squared.slice(0, 5));
     this.assertEqual(this.___(), userNames[0]);
-    this.assertEqual("Bob (32)", userSummaries[1]);
+    this.assertEqual(this.___(), userSummaries[1]);
 
     // Filter operations
     const evenNumbers = numbers.filter((n) => n % 2 === 0);
@@ -236,9 +236,9 @@ export class AboutArrays extends Koan {
 
     this.assertEqual([2, 4, 6, 8, 10], evenNumbers);
     this.assertEqual(this.___(), oddNumbers.length);
-    this.assertEqual(3, activeUsers.length);
+    this.assertEqual(this.___(), activeUsers.length);
     this.assertEqual(this.___(), engineeringUsers.length);
-    this.assertEqual(2, youngActiveUsers.length);
+    this.assertEqual(this.___(), youngActiveUsers.length);
 
     // Reduce operations
     const sum = numbers.reduce((acc, n) => acc + n, 0);
@@ -249,11 +249,11 @@ export class AboutArrays extends Koan {
       return acc;
     }, {} as Record<string, number>);
 
-    this.assertEqual(55, sum); // 1+2+...+10
+    this.assertEqual(this.___(), sum); // 1+2+...+10
     this.assertEqual(this.___(), product); // 1*2*3*4
-    this.assertEqual(113, totalAge);
+    this.assertEqual(this.___(), totalAge);
     this.assertEqual(this.___(), usersByDepartment.Engineering);
-    this.assertEqual(1, usersByDepartment.Design);
+    this.assertEqual(this.___(), usersByDepartment.Design);
 
     // Find and search operations
     const firstEven = numbers.find((n) => n % 2 === 0);
@@ -261,9 +261,9 @@ export class AboutArrays extends Koan {
     const aliceIndex = users.findIndex((user) => user.name === "Alice");
     const inactiveIndex = users.findIndex((user) => !user.active);
 
-    this.assertEqual(2, firstEven);
+    this.assertEqual(this.___(), firstEven);
     this.assertEqual(this.___(), firstOver30?.name);
-    this.assertEqual(0, aliceIndex);
+    this.assertEqual(this.___(), aliceIndex);
     this.assertEqual(this.___(), inactiveIndex);
 
     // Every and some operations
@@ -273,8 +273,8 @@ export class AboutArrays extends Koan {
     const someYoung = users.some((user) => user.age < 25);
 
     this.assertEqual(this.___(), allPositive);
-    this.assertEqual(false, allActive);
-    this.assertEqual(true, someInactive);
+    this.assertEqual(this.___(), allActive);
+    this.assertEqual(this.___(), someInactive);
     this.assertEqual(this.___(), someYoung);
 
     // Method chaining for complex transformations
@@ -332,7 +332,7 @@ export class AboutArrays extends Koan {
 
     this.assertEqual([1, 1, 2, 3, 3], sortedNumbers.slice(0, 5));
     this.assertEqual(this.___(), sortedNumbersDesc[0]);
-    this.assertEqual("Cherry", sortedWords[0]); // Capital letters come first
+    this.assertEqual(this.___(), sortedWords[0]); // Capital letters come first
     this.assertEqual(this.___(), sortedWordsInsensitive[0]); // Case-insensitive
 
     // Multi-criteria sorting
@@ -343,9 +343,9 @@ export class AboutArrays extends Koan {
       return b.price - a.price; // Higher price first within category
     });
 
-    this.assertEqual("Education", sortedProducts[0].category);
+    this.assertEqual(this.___(), sortedProducts[0].category);
     this.assertEqual(this.___(), sortedProducts[1].name); // First in Electronics
-    this.assertEqual("Phone", sortedProducts[2].name); // Second in Electronics
+    this.assertEqual(this.___(), sortedProducts[2].name); // Second in Electronics
 
     // Array flattening
     const nestedArrays = [
@@ -358,7 +358,7 @@ export class AboutArrays extends Koan {
 
     this.assertEqual([1, 2, 3, 4, 5], flatOnceArray.slice(0, 5));
     this.assertEqual(this.___(), deepFlatArray.length);
-    this.assertEqual(7, deepFlatArray[6]);
+    this.assertEqual(this.___(), deepFlatArray[6]);
 
     // FlatMap for mapping and flattening
     const sentences = [
@@ -372,7 +372,7 @@ export class AboutArrays extends Koan {
     );
 
     this.assertEqual(this.___(), allWords.length);
-    this.assertEqual("TypeScript", allWords[2]);
+    this.assertEqual(this.___(), allWords[2]);
     this.assertEqual([5, 5, 10, 2, 5], wordLengths.slice(0, 5));
 
     // Set operations using arrays
@@ -397,9 +397,9 @@ export class AboutArrays extends Koan {
       return acc;
     }, {} as Record<string, typeof products>);
 
-    this.assertEqual(2, grouped.Electronics.length);
+    this.assertEqual(this.___(), grouped.Electronics.length);
     this.assertEqual(this.___(), grouped.Education.length);
-    this.assertEqual("Furniture", grouped.Furniture[0].category);
+    this.assertEqual(this.___(), grouped.Furniture[0].category);
 
     // Advanced array utilities
     function chunk<T>(array: T[], size: number): T[][] {
@@ -436,10 +436,10 @@ export class AboutArrays extends Koan {
     const uniqueNumbers = unique([1, 2, 2, 3, 3, 3, 4]);
     const [expensive, affordable] = partition(products, (p) => p.price > 500);
 
-    this.assertEqual(3, chunkedNumbers.length);
+    this.assertEqual(this.___(), chunkedNumbers.length);
     this.assertEqual([1, 2, 3], chunkedNumbers[0]);
     this.assertEqual(this.___(), uniqueNumbers);
-    this.assertEqual(2, expensive.length);
+    this.assertEqual(this.___(), expensive.length);
     this.assertEqual(this.___(), affordable.length);
   }
 
@@ -485,7 +485,7 @@ export class AboutArrays extends Koan {
     this.assertEqual(SIZE, preAllocated.length);
     this.assertEqual(this.___(), pushBased.length);
     this.assertEqual(arrayFrom.length, preAllocated.length);
-    this.assertEqual(1998, arrayFrom[999]); // Last element
+    this.assertEqual(this.___(), arrayFrom[999]); // Last element
 
     // Efficient array operations
     const data = Array.from({ length: 100 }, (_, i) => ({
@@ -577,7 +577,7 @@ export class AboutArrays extends Koan {
 
     this.assertEqual([0, 1, 1, 2, 3, 5, 8, 13, 21, 34], fibSequence);
     this.assertEqual(this.___(), range);
-    this.assertEqual(7, range.length);
+    this.assertEqual(this.___(), range.length);
 
     // Memory-efficient operations with generators
     function* processLargeDataset(data: number[]): Generator<number> {
@@ -740,10 +740,10 @@ export class AboutArrays extends Koan {
 
     const processedUsers = processUserData(userData);
 
-    this.assertEqual(4, processedUsers.length); // Carol excluded (inactive)
-    this.assertEqual("David Wilson", processedUsers[0].name); // Highest salary
+    this.assertEqual(this.___(), processedUsers.length); // Carol excluded (inactive)
+    this.assertEqual(this.___(), processedUsers[0].name); // Highest salary
     this.assertEqual(this.___(), processedUsers[0].seniorityLevel);
-    this.assertEqual("Senior", processedUsers[1].seniorityLevel); // Bob joined in 2019
+    this.assertEqual(this.___(), processedUsers[1].seniorityLevel); // Bob joined in 2019
 
     // Department analytics
     const departmentAnalytics = userData.reduce(
@@ -783,12 +783,12 @@ export class AboutArrays extends Koan {
       >
     );
 
-    this.assertEqual(3, departmentAnalytics.Engineering.count);
+    this.assertEqual(this.___(), departmentAnalytics.Engineering.count);
     this.assertEqual(
       this.___(),
       Math.round(departmentAnalytics.Engineering.averageSalary)
     );
-    this.assertEqual(6, departmentAnalytics.Engineering.skills.size); // Unique skills
+    this.assertEqual(this.___(), departmentAnalytics.Engineering.skills.size); // Unique skills
     this.assertEqual(this.___(), departmentAnalytics.Marketing.activeCount);
 
     // Skill frequency analysis
@@ -803,9 +803,9 @@ export class AboutArrays extends Koan {
       .slice(0, 3)
       .map(([skill, count]) => ({ skill, count }));
 
-    this.assertEqual(11, allSkills.length);
+    this.assertEqual(this.___(), allSkills.length);
     this.assertEqual(this.___(), Object.keys(skillFrequency).length);
-    this.assertEqual(1, topSkills[0].count); // All skills appear once
+    this.assertEqual(this.___(), topSkills[0].count); // All skills appear once
 
     // Data validation and error handling
     const validateAndProcessUsers = (users: any[]): UserData[] => {
@@ -864,11 +864,11 @@ export class AboutArrays extends Koan {
 
     const validatedUsers = validateAndProcessUsers(invalidData);
 
-    this.assertEqual(2, validatedUsers.length);
-    this.assertEqual("Valid User", validatedUsers[0].name);
-    this.assertEqual("Trimmed", validatedUsers[1].name);
+    this.assertEqual(this.___(), validatedUsers.length);
+    this.assertEqual(this.___(), validatedUsers[0].name);
+    this.assertEqual(this.___(), validatedUsers[1].name);
     this.assertEqual(this.___(), validatedUsers[1].email);
-    this.assertEqual(2, validatedUsers[1].skills.length); // Empty string filtered out
+    this.assertEqual(this.___(), validatedUsers[1].skills.length); // Empty string filtered out
 
     // Pagination simulation
     const paginateData = <T>(data: T[], page: number, pageSize: number) => {
@@ -891,12 +891,12 @@ export class AboutArrays extends Koan {
     const page2 = paginateData(userData, 2, 2);
     const page3 = paginateData(userData, 3, 2);
 
-    this.assertEqual(2, page1.data.length);
+    this.assertEqual(this.___(), page1.data.length);
     this.assertEqual(this.___(), page1.totalPages);
-    this.assertEqual(true, page1.hasNextPage);
-    this.assertEqual(false, page1.hasPrevPage);
+    this.assertEqual(this.___(), page1.hasNextPage);
+    this.assertEqual(this.___(), page1.hasPrevPage);
     this.assertEqual(this.___(), page2.hasNextPage);
-    this.assertEqual(1, page3.data.length); // Last page with remaining item
+    this.assertEqual(this.___(), page3.data.length); // Last page with remaining item
 
     // Advanced aggregation example
     interface SalesData {
@@ -972,10 +972,10 @@ export class AboutArrays extends Koan {
       return acc;
     }, {} as Record<string, any>);
 
-    this.assertEqual(2950, salesSummary["2024-01"].totalSales);
+    this.assertEqual(this.___(), salesSummary["2024-01"].totalSales);
     this.assertEqual(this.___(), salesSummary["2024-01"].transactionCount);
-    this.assertEqual(590, salesSummary["2024-01"].averageTransaction);
-    this.assertEqual(2500, salesSummary["2024-01"].categorySales.Electronics);
+    this.assertEqual(this.___(), salesSummary["2024-01"].averageTransaction);
+    this.assertEqual(this.___(), salesSummary["2024-01"].categorySales.Electronics);
     this.assertEqual(this.___(), salesSummary["2024-01"].regionSales.North);
   }
 }

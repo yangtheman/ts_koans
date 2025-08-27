@@ -37,9 +37,9 @@ export class AboutTypes extends Koan {
     const binary: number = 0b1010;
     const octal: number = 0o755;
 
-    this.assertEqual("number", typeof integer);
+    this.assertEqual(this.___(), typeof integer);
     this.assertEqual(this.___(), typeof float); // All numbers share the same runtime type
-    this.assertEqual("number", typeof scientific);
+    this.assertEqual(this.___(), typeof scientific);
     this.assertEqual(this.___(), typeof hex); // Hex literals are still numbers
 
     // Special number values
@@ -47,7 +47,7 @@ export class AboutTypes extends Koan {
     const notANumber: number = NaN;
 
     this.assertEqual(this.___(), typeof infinity); // Even infinity is a number
-    this.assertEqual("number", typeof notANumber);
+    this.assertEqual(this.___(), typeof notANumber);
 
     // Number precision and limits
     this.assertEqual(this.___(), Number.MAX_SAFE_INTEGER); // 9007199254740991
@@ -76,7 +76,7 @@ export class AboutTypes extends Koan {
     const templateLiteral: string = `Hello World`;
 
     this.assertEqual(this.___(), typeof singleQuote); // All string literals have same type
-    this.assertEqual("string", typeof doubleQuote);
+    this.assertEqual(this.___(), typeof doubleQuote);
     this.assertEqual(this.___(), typeof templateLiteral);
 
     // Template literal interpolation
@@ -96,7 +96,7 @@ export class AboutTypes extends Koan {
     this.assertEqual(this.___(), multiline.includes("\n")); // Contains newlines
 
     // String methods and properties
-    this.assertEqual(15, "Hello TypeScript".length);
+    this.assertEqual(this.___(), "Hello TypeScript".length);
     this.assertEqual(this.___(), "HELLO".toLowerCase()); // String methods return new strings
     this.assertEqual("HELLO", "hello".toUpperCase());
 
@@ -117,7 +117,7 @@ export class AboutTypes extends Koan {
     const isTrue: boolean = true;
     const isFalse: boolean = false;
 
-    this.assertEqual("boolean", typeof isTrue);
+    this.assertEqual(this.___(), typeof isTrue);
     this.assertEqual(this.___(), typeof isFalse); // Both true and false are 'boolean'
 
     // Boolean() constructor for explicit conversion
@@ -145,7 +145,7 @@ export class AboutTypes extends Koan {
     const result3 = true && "success"; // Returns last evaluated value
 
     this.assertEqual(this.___(), result1); // "hello"
-    this.assertEqual(42, result2);
+    this.assertEqual(this.___(), result2);
     this.assertEqual(this.___(), result3); // "success"
   }
 
@@ -183,7 +183,7 @@ export class AboutTypes extends Koan {
     // Checking for null/undefined safely
     this.assertEqual(this.___(), person.email == null); // true (catches both null and undefined)
     this.assertEqual(this.___(), person.email === null); // false (only matches null)
-    this.assertEqual(true, person.email === undefined);
+    this.assertEqual(this.___(), person.email === undefined);
 
     // Optional chaining (TypeScript 3.7+) for safe access
     const user: { profile: { bio?: string } | null } = {
@@ -207,7 +207,7 @@ export class AboutTypes extends Koan {
     const sym3: symbol = Symbol("description");
 
     this.assertEqual(this.___(), typeof sym1); // "symbol"
-    this.assertEqual("symbol", typeof sym2);
+    this.assertEqual(this.___(), typeof sym2);
 
     // Each symbol is unique
     this.assertEqual(this.___(), sym2 === sym3); // false - even same description
@@ -221,7 +221,7 @@ export class AboutTypes extends Koan {
     };
 
     this.assertEqual(this.___(), obj[uniqueKey]); // Access with symbol key
-    this.assertEqual("normal value", obj.normalProp);
+    this.assertEqual(this.___(), obj.normalProp);
 
     // Symbols don't appear in normal iteration
     const keys = Object.keys(obj);
@@ -240,7 +240,7 @@ export class AboutTypes extends Koan {
     const bigIntConstructor: bigint = BigInt("123456789012345678901234567890");
 
     this.assertEqual(this.___(), typeof bigIntLiteral); // "bigint"
-    this.assertEqual("bigint", typeof bigIntConstructor);
+    this.assertEqual(this.___(), typeof bigIntConstructor);
 
     this.assertEqual(this.___(), bigIntLiteral === bigIntConstructor); // true
 
@@ -249,7 +249,7 @@ export class AboutTypes extends Koan {
     const bigintNumber: bigint = 123n;
 
     this.assertEqual(this.___(), typeof regularNumber); // "number"
-    this.assertEqual("bigint", typeof bigintNumber);
+    this.assertEqual(this.___(), typeof bigintNumber);
 
     // Using explicit conversion to demonstrate the concept
     this.assertEqual(this.___(), Number(bigintNumber) === regularNumber); // true when converted
@@ -305,7 +305,7 @@ export class AboutTypes extends Koan {
     const greeting2: Greeting = "hello TypeScript";
 
     this.assertEqual(this.___(), greeting1); // "hello world"
-    this.assertEqual("hello TypeScript", greeting2);
+    this.assertEqual(this.___(), greeting2);
   }
 
   test_union_types(): void {
@@ -344,7 +344,7 @@ export class AboutTypes extends Koan {
     // Arrays with union types
     const mixedArray: (string | number)[] = ["hello", 42, "world", 100];
     this.assertEqual(this.___(), mixedArray.length); // 4
-    this.assertEqual("hello", mixedArray[0]);
+    this.assertEqual(this.___(), mixedArray[0]);
     this.assertEqual(this.___(), mixedArray[1]); // 42
 
     // Discriminated unions (tagged unions)
@@ -382,7 +382,7 @@ export class AboutTypes extends Koan {
     const strLength2: number = (someValue as string).length; // 'as' syntax (preferred)
 
     this.assertEqual(this.___(), strLength1); // 11
-    this.assertEqual(11, strLength2);
+    this.assertEqual(this.___(), strLength2);
 
     // Type narrowing with instanceof
     class Dog {

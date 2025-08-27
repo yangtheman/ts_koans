@@ -78,19 +78,19 @@ export class AboutInterfaces extends Koan {
     const personEmployee: Person = employee; // Valid due to structural typing
 
     this.assertEqual(this.___(), alice.name); // "Alice"
-    this.assertEqual(30, alice.age);
+    this.assertEqual(this.___(), alice.age);
     this.assertEqual(this.___(), alice.email); // undefined
 
-    this.assertEqual("Bob", bob.name);
+    this.assertEqual(this.___(), bob.name);
     this.assertEqual(this.___(), bob.email); // "bob@example.com"
 
     // Structural compatibility
-    this.assertEqual("Charlie", personEmployee.name);
+    this.assertEqual(this.___(), personEmployee.name);
     this.assertEqual(this.___(), personEmployee.age); // 28
 
     // Objects can satisfy multiple interfaces if they have the right shape
     const contact: Contact = alice; // Alice satisfies Contact interface too
-    this.assertEqual("Alice", contact.name);
+    this.assertEqual(this.___(), contact.name);
 
     // Function that accepts any object with Person structure
     function greetPerson(p: Person): string {
@@ -103,7 +103,7 @@ export class AboutInterfaces extends Koan {
     // Readonly property demonstration
     // alice.id = 999; // Would cause compilation error
 
-    this.assertEqual(1, alice.id);
+    this.assertEqual(this.___(), alice.id);
     this.assertEqual(this.___(), bob.id); // 2
   }
 
@@ -177,7 +177,7 @@ export class AboutInterfaces extends Koan {
     );
 
     this.assertEqual(this.___(), upperCaseTransformer("hello")); // "HELLO"
-    this.assertEqual("Converts to uppercase", upperCaseTransformer.description);
+    this.assertEqual(this.___(), upperCaseTransformer.description);
     this.assertEqual(this.___(), upperCaseTransformer.version); // 1
 
     // Generic mapper interface
@@ -280,16 +280,16 @@ export class AboutInterfaces extends Koan {
     };
 
     this.assertEqual(this.___(), person.name); // "Alice Johnson"
-    this.assertEqual("Alice", person.displayName);
+    this.assertEqual(this.___(), person.displayName);
     this.assertEqual(this.___(), person.age); // 30
 
-    this.assertEqual("user-123", user.id);
+    this.assertEqual(this.___(), user.id);
     this.assertEqual(this.___(), user.permissions.length); // 2
-    this.assertEqual(true, user.isActive);
+    this.assertEqual(this.___(), user.isActive);
 
-    this.assertEqual("advanced", admin.adminLevel);
+    this.assertEqual(this.___(), admin.adminLevel);
     this.assertEqual(this.___(), admin.canAccessAllUsers); // true
-    this.assertEqual(4, admin.permissions.length);
+    this.assertEqual(this.___(), admin.permissions.length);
 
     // Document example
     const doc: Document = {
@@ -305,9 +305,9 @@ export class AboutInterfaces extends Koan {
       version: 2,
     };
 
-    this.assertEqual("TypeScript Interfaces Guide", doc.title);
+    this.assertEqual(this.___(), doc.title);
     this.assertEqual(this.___(), doc.tags.length); // 3
-    this.assertEqual(true, doc.isPublished);
+    this.assertEqual(this.___(), doc.isPublished);
     this.assertEqual(this.___(), doc.version); // 2
 
     // Function accepting multiple interface types
@@ -453,7 +453,7 @@ export class AboutInterfaces extends Koan {
     // Test Circle implementation
     this.assertEqual(this.___(), circle.draw()); // "Drawing a circle with radius 5"
     const circleBounds = circle.getBounds();
-    this.assertEqual(10, circleBounds.width);
+    this.assertEqual(this.___(), circleBounds.width);
 
     // Test Rectangle implementation (multiple interfaces)
     rectangle.move(5, 10);
@@ -461,8 +461,8 @@ export class AboutInterfaces extends Koan {
     rectangle.resize(12, 6);
 
     this.assertEqual(this.___(), rectangle.x); // 5
-    this.assertEqual(10, rectangle.y);
-    this.assertEqual("blue", rectangle.color);
+    this.assertEqual(this.___(), rectangle.y);
+    this.assertEqual(this.___(), rectangle.color);
     this.assertEqual(this.___(), rectangle.width); // 12
 
     const rectDraw = rectangle.draw();
@@ -481,7 +481,7 @@ export class AboutInterfaces extends Koan {
     const drawables: Drawable[] = [circle, rectangle, triangle];
     const moveables: Moveable[] = [rectangle, triangle];
 
-    this.assertEqual(3, drawables.length);
+    this.assertEqual(this.___(), drawables.length);
     this.assertEqual(this.___(), moveables.length); // 2
 
     // Interface segregation - functions accept specific interfaces
@@ -497,7 +497,7 @@ export class AboutInterfaces extends Koan {
     this.assertEqual(this.___(), circleRender.includes("circle")); // true
 
     moveShape(rectangle, 1, 1);
-    this.assertEqual(6, rectangle.x);
+    this.assertEqual(this.___(), rectangle.x);
     this.assertEqual(this.___(), rectangle.y); // 11
   }
 
@@ -554,12 +554,12 @@ export class AboutInterfaces extends Koan {
     };
 
     this.assertEqual(this.___(), colors.red); // "#FF0000"
-    this.assertEqual("#00FF00", colors["green"]);
+    this.assertEqual(this.___(), colors["green"]);
     this.assertEqual(this.___(), colors.primary); // "#007BFF"
 
-    this.assertEqual(4, scores.length);
+    this.assertEqual(this.___(), scores.length);
     this.assertEqual(this.___(), scores.alice); // 95
-    this.assertEqual(92, scores["charlie"]);
+    this.assertEqual(this.___(), scores["charlie"]);
 
     // Generic dictionary usage
     const userProfiles: Dictionary<{ name: string; age: number }> = {
@@ -568,9 +568,9 @@ export class AboutInterfaces extends Koan {
       admin: { name: "Admin User", age: 35 },
     };
 
-    this.assertEqual("Alice", userProfiles.user1.name);
+    this.assertEqual(this.___(), userProfiles.user1.name);
     this.assertEqual(this.___(), userProfiles.user2.age); // 25
-    this.assertEqual("Admin User", userProfiles.admin.name);
+    this.assertEqual(this.___(), userProfiles.admin.name);
 
     // API response with metadata
     const apiResponse: APIResponse<string[]> = {
@@ -582,9 +582,9 @@ export class AboutInterfaces extends Koan {
       version: "v1.0",
     };
 
-    this.assertEqual(true, apiResponse.success);
+    this.assertEqual(this.___(), apiResponse.success);
     this.assertEqual(this.___(), apiResponse.data.length); // 3
-    this.assertEqual("req-123", apiResponse.requestId);
+    this.assertEqual(this.___(), apiResponse.requestId);
 
     // Flexible dictionary with mixed types
     const config: FlexibleDictionary = {
@@ -596,9 +596,9 @@ export class AboutInterfaces extends Koan {
       port: 8080, // Number value for string key
     };
 
-    this.assertEqual(8080, config[0]);
+    this.assertEqual(this.___(), config[0]);
     this.assertEqual(this.___(), config.name); // "MyApp"
-    this.assertEqual("1.0.0", config.version);
+    this.assertEqual(this.___(), config.version);
 
     // Function working with index signatures
     function getProperty<T>(obj: Dictionary<T>, key: string): T | undefined {
@@ -625,9 +625,9 @@ export class AboutInterfaces extends Koan {
       [`${dynamicKey}2`]: "another dynamic value",
     };
 
-    this.assertEqual("value", dynamicObject.static);
+    this.assertEqual(this.___(), dynamicObject.static);
     this.assertEqual(this.___(), dynamicObject.computed); // "dynamic value"
-    this.assertEqual("another dynamic value", dynamicObject.computed2);
+    this.assertEqual(this.___(), dynamicObject.computed2);
   }
 
   test_advanced_interface_patterns(): void {
@@ -712,10 +712,10 @@ export class AboutInterfaces extends Koan {
       options: undefined as never, // Required by conditional type
     };
 
-    this.assertEqual(true, enabledConfig.enabled);
+    this.assertEqual(this.___(), enabledConfig.enabled);
     this.assertEqual(this.___(), enabledConfig.options.host); // "localhost"
-    this.assertEqual(3000, enabledConfig.options.port);
-    this.assertEqual(false, disabledConfig.enabled);
+    this.assertEqual(this.___(), enabledConfig.options.port);
+    this.assertEqual(this.___(), disabledConfig.enabled);
 
     // Test mapped type interfaces
     const partialUser: PartialUser = {
@@ -731,7 +731,7 @@ export class AboutInterfaces extends Koan {
 
     this.assertEqual(this.___(), partialUser.name); // "John Doe"
     this.assertEqual(undefined, partialUser.id);
-    this.assertEqual("user-123", readonlyUser.id);
+    this.assertEqual(this.___(), readonlyUser.id);
     this.assertEqual(this.___(), readonlyUser.email); // "jane@example.com"
     // readonlyUser.name = "New Name"; // Would cause compilation error
 
@@ -773,7 +773,7 @@ export class AboutInterfaces extends Koan {
     });
 
     this.assertEqual(this.___(), userCreatedData!.userId); // "user-456"
-    this.assertEqual(true, userCreatedData!.timestamp instanceof Date);
+    this.assertEqual(this.___(), userCreatedData!.timestamp instanceof Date);
 
     // Test repository interface
     class UserRepository implements Repository<BaseUser, "id"> {
@@ -827,7 +827,7 @@ export class AboutInterfaces extends Koan {
     });
 
     this.assertEqual(this.___(), typeof createdUser); // "object" (Promise)
-    this.assertEqual("function", typeof userRepo.findById);
+    this.assertEqual(this.___(), typeof userRepo.findById);
     this.assertEqual(this.___(), typeof userRepo.update); // "function"
   }
 
@@ -870,7 +870,7 @@ export class AboutInterfaces extends Koan {
     };
 
     this.assertEqual(this.___(), mergedObject.property1); // "value1"
-    this.assertEqual(42, mergedObject.property2);
+    this.assertEqual(this.___(), mergedObject.property2);
     this.assertEqual(this.___(), mergedObject.property3); // true
     this.assertEqual("Method 2: test", mergedObject.method2("test"));
     this.assertEqual(20, mergedObject.method3(10));
@@ -897,9 +897,9 @@ export class AboutInterfaces extends Koan {
     const configItem = createConfigurableItem("test-item");
     const isValid = validateConfigurableItem(configItem);
 
-    this.assertEqual("test-item", configItem.name);
+    this.assertEqual(this.___(), configItem.name);
     this.assertEqual(this.___(), isValid); // true
-    this.assertEqual("function", typeof createConfigurableItem);
+    this.assertEqual(this.___(), typeof createConfigurableItem);
 
     // Generic interface merging
     interface Container<T> {

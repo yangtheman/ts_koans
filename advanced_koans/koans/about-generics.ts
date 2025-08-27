@@ -48,8 +48,8 @@ export class AboutGenerics extends Koan {
     this.assertEqual(this.__(), numberResult);
     this.assertEqual(this.___(), stringResult);
     this.assertEqual(this.___(), coordinates[0]);
-    this.assertEqual("North", coordinates[1]);
-    this.assertEqual(5, arrayLength);
+    this.assertEqual(this.___(), coordinates[1]);
+    this.assertEqual(this.___(), arrayLength);
     this.assertEqual(this.__(), stringLength);
   }
 
@@ -117,8 +117,8 @@ export class AboutGenerics extends Koan {
     const nonexistent = userRepo.findById("999");
 
     this.assertEqual(this.___(), alice?.name);
-    this.assertEqual("alice@example.com", alice?.email);
-    this.assertEqual(2, allUsers.length);
+    this.assertEqual(this.___(), alice?.email);
+    this.assertEqual(this.___(), allUsers.length);
     this.assertEqual(this.___(), nonexistent);
   }
 
@@ -177,9 +177,9 @@ export class AboutGenerics extends Koan {
     const sum = add(10, 20);
     const userName = getProperty(user, "name");
 
-    this.assertEqual(31, updatedUser.age);
+    this.assertEqual(this.___(), updatedUser.age);
     this.assertEqual(this.___(), updatedUser.name);
-    this.assertEqual(5, lastNumber);
+    this.assertEqual(this.___(), lastNumber);
     this.assertEqual(this.___(), lastString);
     this.assertEqual(this.__(), sum);
     this.assertEqual(this.___(), userName);
@@ -275,7 +275,7 @@ export class AboutGenerics extends Koan {
     const nonexistent = userCache.get("user999");
 
     this.assertEqual(this.___(), alice?.name);
-    this.assertEqual(30, alice?.age);
+    this.assertEqual(this.___(), alice?.age);
     this.assertEqual(this.___(), bob?.name);
     this.assertEqual(true, userCache.has("user1"));
     this.assertEqual(this.___(), userCache.has("user999"));
@@ -349,17 +349,17 @@ export class AboutGenerics extends Koan {
     type NonGuestRoles = Exclude<User["role"], "guest">;
 
     this.assertEqual(this.___(), userUpdate.name);
-    this.assertEqual(31, userUpdate.age);
+    this.assertEqual(this.___(), userUpdate.age);
 
-    this.assertEqual("Alice", profile.name);
+    this.assertEqual(this.___(), profile.name);
     this.assertEqual(this.___(), profile.email);
 
     this.assertEqual(this.___(), publicUser.role);
-    this.assertEqual("alice@example.com", publicUser.email);
+    this.assertEqual(this.___(), publicUser.email);
 
-    this.assertEqual(3, permissions.admin.length);
+    this.assertEqual(this.___(), permissions.admin.length);
     this.assertEqual(this.___(), permissions.guest.length);
-    this.assertEqual("read", permissions.user[0]);
+    this.assertEqual(this.___(), permissions.user[0]);
   }
 
   /**
@@ -429,9 +429,9 @@ export class AboutGenerics extends Koan {
     const objectResponse = createResponse({ name: "Alice" });
 
     this.assertEqual(this.___(), stringResponse.message);
-    this.assertEqual(42, numberResponse.count);
+    this.assertEqual(this.___(), numberResponse.count);
     this.assertEqual(this.___(), booleanResponse.success);
-    this.assertEqual("Alice", objectResponse.data.name);
+    this.assertEqual(this.___(), objectResponse.data.name);
   }
 
   /**
@@ -522,12 +522,12 @@ export class AboutGenerics extends Koan {
     this.assertEqual(null, partialUser.email);
     this.assertEqual(this.___(), partialUser.id);
 
-    this.assertEqual("123", stringifiedUser.id);
+    this.assertEqual(this.___(), stringifiedUser.id);
     this.assertEqual(this.___(), stringifiedUser.isActive);
 
-    this.assertEqual(true, validationResults.id.isValid);
+    this.assertEqual(this.___(), validationResults.id.isValid);
     this.assertEqual(this.___(), validationResults.name.isValid);
-    this.assertEqual("Name is required", validationResults.name.error);
+    this.assertEqual(this.___(), validationResults.name.error);
   }
 
   /**
@@ -616,7 +616,7 @@ export class AboutGenerics extends Koan {
       buildApiUrl("products")
     );
     this.assertEqual(this.___(), selectUsersOp);
-    this.assertEqual("INSERT_POSTS", insertPostsOp);
+    this.assertEqual(this.___(), insertPostsOp);
   }
 
   /**
@@ -692,16 +692,16 @@ export class AboutGenerics extends Koan {
     const result: ProcessUserReturn = { processed: true };
 
     // Test with actual values that would match the inferred types
-    this.assertEqual(123, params[0]);
+    this.assertEqual(this.___(), params[0]);
     this.assertEqual(this.___(), params[1]);
-    this.assertEqual(true, params[2]);
+    this.assertEqual(this.___(), params[2]);
     this.assertEqual(this.___(), result.processed);
 
     // Test array operations that use element types
     const firstNumber = numbers[0];
     const firstUser = users[0];
 
-    this.assertEqual(1, firstNumber);
+    this.assertEqual(this.___(), firstNumber);
     this.assertEqual(this.___(), firstUser.name);
   }
 
@@ -818,13 +818,13 @@ export class AboutGenerics extends Koan {
       .build();
 
     this.assertEqual(this.___(), userTree.value.name);
-    this.assertEqual(2, userTree.children.length);
+    this.assertEqual(this.___(), userTree.children.length);
     this.assertEqual(this.___(), userTree.children[0].value.name);
-    this.assertEqual("bob@example.com", userTree.children[1].value.email);
+    this.assertEqual(this.___(), userTree.children[1].value.email);
 
-    this.assertEqual(2, query.conditions.length);
+    this.assertEqual(this.___(), query.conditions.length);
     this.assertEqual(this.___(), query.fields.length);
-    this.assertEqual("name = Alice", query.conditions[0]);
+    this.assertEqual(this.___(), query.conditions[0]);
     this.assertEqual(this.___(), query.hasSelection);
   }
 }

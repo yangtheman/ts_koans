@@ -71,12 +71,12 @@ export class AboutClasses extends Koan {
 
     // Each instance has its own property values
     this.assertEqual(this.___(), alice.name); // "Alice"
-    this.assertEqual(30, alice.age);
+    this.assertEqual(this.___(), alice.age);
     this.assertEqual(this.___(), bob.name); // "Bob"
-    this.assertEqual(25, bob.age);
+    this.assertEqual(this.___(), bob.age);
 
     // Instances share the same class methods
-    this.assertEqual("function", typeof alice.getInfo);
+    this.assertEqual(this.___(), typeof alice.getInfo);
     this.assertEqual(this.___(), alice.getInfo()); // "Alice is 30 years old"
 
     // Each instance has unique private properties
@@ -85,12 +85,12 @@ export class AboutClasses extends Koan {
     this.assertEqual(this.___(), aliceId !== bobId); // true - unique IDs
 
     // Type checking with instanceof
-    this.assertEqual(true, alice instanceof Person);
+    this.assertEqual(this.___(), alice instanceof Person);
     this.assertEqual(this.___(), alice instanceof Object); // true - inheritance chain
-    this.assertEqual("object", typeof alice);
+    this.assertEqual(this.___(), typeof alice);
 
     // Constructor function properties
-    this.assertEqual("Person", Person.name);
+    this.assertEqual(this.___(), Person.name);
     this.assertEqual(this.___(), Person.length); // 2 - number of constructor parameters
   }
 
@@ -188,12 +188,12 @@ export class AboutClasses extends Koan {
 
     // Arrow function method preserves 'this'
     const delayedAdd = calc.delayedAdd;
-    this.assertEqual("function", typeof delayedAdd);
+    this.assertEqual(this.___(), typeof delayedAdd);
 
     // Demonstration of method types
     this.assertEqual(this.___(), typeof calc.add); // "function"
-    this.assertEqual("function", typeof calc.getResult);
-    this.assertEqual("function", typeof calc.delayedAdd);
+    this.assertEqual(this.___(), typeof calc.getResult);
+    this.assertEqual(this.___(), typeof calc.delayedAdd);
   }
 
   test_inheritance_and_polymorphism(): void {
@@ -322,9 +322,9 @@ export class AboutClasses extends Koan {
     this.assertEqual(this.___(), whiskers.greet()); // "Whiskers says: Meow!"
 
     // Inheritance chain verification
-    this.assertEqual(true, buddy instanceof Dog);
+    this.assertEqual(this.___(), buddy instanceof Dog);
     this.assertEqual(this.___(), buddy instanceof Animal); // true
-    this.assertEqual(true, whiskers instanceof Cat);
+    this.assertEqual(this.___(), whiskers instanceof Cat);
     this.assertEqual(this.___(), whiskers instanceof Animal); // true
 
     // Accessing inherited and own methods
@@ -587,7 +587,7 @@ export class AboutClasses extends Koan {
     this.assertEqual(this.___(), area > 78 && area < 79); // true (~78.54)
 
     const maxValue = MathUtils.max(10, 25, 5, 30);
-    this.assertEqual(30, maxValue);
+    this.assertEqual(this.___(), maxValue);
 
     // Tracking static property changes
     const initialCount = MathUtils.getCalculationCount();
@@ -617,7 +617,7 @@ export class AboutClasses extends Koan {
     this.assertEqual(false, MathUtils.isValidNumber(NaN));
 
     // Accessing static members through class name (not instances)
-    this.assertEqual("number", typeof MathUtils.PI);
+    this.assertEqual(this.___(), typeof MathUtils.PI);
     this.assertEqual(this.___(), typeof MathUtils.circleArea); // "function"
 
     // Static members are shared across all instances
@@ -783,22 +783,22 @@ export class AboutClasses extends Koan {
     const postgresResult = postgres.query("SELECT * FROM users");
 
     this.assertEqual(this.___(), typeof mysqlResult); // "object"
-    this.assertEqual("object", typeof postgresResult);
+    this.assertEqual(this.___(), typeof postgresResult);
 
     // Database-specific methods
     const tables = mysql.showTables();
     const schemas = postgres.listSchemas();
 
     this.assertEqual(this.___(), tables.includes("users")); // true
-    this.assertEqual(3, schemas.length);
+    this.assertEqual(this.___(), schemas.length);
 
     // Abstract class cannot be instantiated
     // const db = new DatabaseConnection('test'); // Compilation error
 
     // Inheritance verification
-    this.assertEqual(true, mysql instanceof MySQLConnection);
+    this.assertEqual(this.___(), mysql instanceof MySQLConnection);
     this.assertEqual(this.___(), mysql instanceof DatabaseConnection); // true
-    this.assertEqual(true, postgres instanceof PostgreSQLConnection);
+    this.assertEqual(this.___(), postgres instanceof PostgreSQLConnection);
     this.assertEqual(this.___(), postgres instanceof DatabaseConnection); // true
   }
 
@@ -941,51 +941,51 @@ export class AboutClasses extends Koan {
     // Rectangle tests
     const rect = new Rectangle(10, 5);
 
-    this.assertEqual(10, rect.width);
+    this.assertEqual(this.___(), rect.width);
     this.assertEqual(this.___(), rect.height); // 5
 
     // Computed properties
-    this.assertEqual(50, rect.area);
+    this.assertEqual(this.___(), rect.area);
     this.assertEqual(this.___(), rect.perimeter); // 30
-    this.assertEqual(2, rect.aspectRatio);
+    this.assertEqual(this.___(), rect.aspectRatio);
     this.assertEqual(this.___(), rect.orientation); // "landscape"
 
     // Setter validation
     rect.width = 15;
-    this.assertEqual(15, rect.width);
+    this.assertEqual(this.___(), rect.width);
     this.assertEqual(this.___(), rect.area); // 75 (recalculated)
 
     // Square creation
     const square = Rectangle.createSquare(8);
-    this.assertEqual(8, square.width);
+    this.assertEqual(this.___(), square.width);
     this.assertEqual(this.___(), square.height); // 8
-    this.assertEqual("square", square.orientation);
+    this.assertEqual(this.___(), square.orientation);
 
     // Scaling
     square.scale(2);
-    this.assertEqual(16, square.width);
+    this.assertEqual(this.___(), square.width);
     this.assertEqual(this.___(), square.area); // 256
 
     // Temperature tests
     const temp = new Temperature(25);
 
-    this.assertEqual(25, temp.celsius);
+    this.assertEqual(this.___(), temp.celsius);
     this.assertEqual(this.___(), temp.fahrenheit); // 77
     this.assertEqual(this.___(), temp.kelvin > 298 && temp.kelvin < 299); // true (~298.15)
 
     // Temperature conversion through setters
     temp.fahrenheit = 68;
     this.assertEqual(this.___(), temp.celsius === 20); // true
-    this.assertEqual(true, temp.isComfortable);
+    this.assertEqual(this.___(), temp.isComfortable);
 
     temp.kelvin = 373.15;
-    this.assertEqual(100, temp.celsius);
+    this.assertEqual(this.___(), temp.celsius);
     this.assertEqual(this.___(), temp.state); // "gas"
 
     // Validation in setters
     try {
       temp.celsius = -300; // Below absolute zero
-      this.assertEqual("should not reach", "this point"); // Should not execute
+      this.assertEqual(this.___(), "this point"); // Should not execute
     } catch (error) {
       this.assertEqual(
         this.___(),
@@ -995,7 +995,7 @@ export class AboutClasses extends Koan {
 
     // State computation
     temp.celsius = -5;
-    this.assertEqual("frozen", temp.state);
+    this.assertEqual(this.___(), temp.state);
     this.assertEqual(this.___(), temp.isComfortable); // false
   }
 
@@ -1174,18 +1174,18 @@ export class AboutClasses extends Koan {
     this.assertEqual(this.___(), amphibious.getDepth()); // 10
 
     // Type checking - instances have all mixed-in methods
-    this.assertEqual("function", typeof plane.takeOff);
+    this.assertEqual(this.___(), typeof plane.takeOff);
     this.assertEqual(this.___(), typeof car.accelerate); // "function"
-    this.assertEqual("function", typeof flyingCar.takeOff);
+    this.assertEqual(this.___(), typeof flyingCar.takeOff);
     this.assertEqual(this.___(), typeof flyingCar.accelerate); // "function"
-    this.assertEqual("function", typeof sub.dive);
+    this.assertEqual(this.___(), typeof sub.dive);
     this.assertEqual(this.___(), typeof amphibious.dive); // "function"
-    this.assertEqual("function", typeof amphibious.accelerate);
+    this.assertEqual(this.___(), typeof amphibious.accelerate);
 
     // Inheritance chain verification
-    this.assertEqual(true, plane instanceof Vehicle);
+    this.assertEqual(this.___(), plane instanceof Vehicle);
     this.assertEqual(this.___(), car instanceof Vehicle); // true
-    this.assertEqual(true, flyingCar instanceof Vehicle);
+    this.assertEqual(this.___(), flyingCar instanceof Vehicle);
     this.assertEqual(this.___(), sub instanceof Vehicle); // true
 
     // Mixin methods are properly bound
@@ -1193,7 +1193,7 @@ export class AboutClasses extends Koan {
     // takeOffMethod(); // Would work if properly bound, but context is important
 
     this.assertEqual(this.___(), plane.passengerCapacity); // 400
-    this.assertEqual(4, car.doors);
-    this.assertEqual(20, sub.crewSize);
+    this.assertEqual(this.___(), car.doors);
+    this.assertEqual(this.___(), sub.crewSize);
   }
 }

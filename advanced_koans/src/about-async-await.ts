@@ -28,39 +28,26 @@ export class AboutAsyncAwait extends Koan {
    * how promises resolve, what they contain, and how to extract their values
    * is fundamental to async programming.
    */
-  test_promise_values_and_resolution(): void {
+  async test_promise_values_and_resolution(): Promise<void> {
     // Promises resolve to actual values, not just "Promise" objects
     const numberPromise = Promise.resolve(42);
     const stringPromise = Promise.resolve("Hello World");
     const objectPromise = Promise.resolve({ name: "Alice", age: 30 });
     const arrayPromise = Promise.resolve([1, 2, 3, 4, 5]);
 
-    // We can extract values using .then()
-    let extractedNumber: number = 0;
-    let extractedString: string = "";
-    let extractedObject: { name: string; age: number } = { name: "", age: 0 };
-    let extractedArray: number[] = [];
-
-    numberPromise.then((value) => {
-      extractedNumber = value;
-    });
-    stringPromise.then((value) => {
-      extractedString = value;
-    });
-    objectPromise.then((value) => {
-      extractedObject = value;
-    });
-    arrayPromise.then((value) => {
-      extractedArray = value;
-    });
+    // We can extract values using await
+    const extractedNumber: number = await numberPromise;
+    const extractedString: string = await stringPromise;
+    const extractedObject: { name: string; age: number } = await objectPromise;
+    const extractedArray: number[] = await arrayPromise;
 
     // What values do the promises resolve to?
-    this.assertEqual(this.__(), extractedNumber);
-    this.assertEqual(this.___(), extractedString);
-    this.assertEqual(this.___(), extractedObject.name);
-    this.assertEqual(this.__(), extractedObject.age);
-    this.assertEqual(this.__(), extractedArray.length);
-    this.assertEqual(this.__(), extractedArray[2]); // Third element
+    this.assertEqual(42, extractedNumber);
+    this.assertEqual("Hello World", extractedString);
+    this.assertEqual("Alice", extractedObject.name);
+    this.assertEqual(30, extractedObject.age);
+    this.assertEqual(5, extractedArray.length);
+    this.assertEqual(3, extractedArray[2]); // Third element
 
     // Promise.resolve() vs new Promise()
     const quickResolve = Promise.resolve("immediate");
@@ -68,18 +55,11 @@ export class AboutAsyncAwait extends Koan {
       resolve("eventual"); // Resolves on next tick
     });
 
-    let quickValue = "";
-    let delayedValue = "";
+    const quickValue = await quickResolve;
+    const delayedValue = await delayedResolve;
 
-    quickResolve.then((value) => {
-      quickValue = value;
-    });
-    delayedResolve.then((value) => {
-      delayedValue = value;
-    });
-
-    this.assertEqual(this.___(), quickValue);
-    this.assertEqual(this.___(), delayedValue);
+    this.assertEqual("immediate", quickValue);
+    this.assertEqual("eventual", delayedValue);
 
     // Chaining transforms values
     const mathChain = Promise.resolve(5)
@@ -87,11 +67,8 @@ export class AboutAsyncAwait extends Koan {
       .then((x) => x + 3) // 13
       .then((x) => x ** 2); // 169
 
-    let finalMathResult = 0;
-    mathChain.then((value) => {
-      finalMathResult = value;
-    });
-    this.assertEqual(this.___(), finalMathResult);
+    const finalMathResult = await mathChain;
+    this.assertEqual(169, finalMathResult);
 
     // Type transformations in chains
     const typeChain = Promise.resolve(100)
@@ -100,11 +77,8 @@ export class AboutAsyncAwait extends Koan {
       .then((len) => len > 10) // number → boolean
       .then((bool) => ({ isLong: bool })); // boolean → object
 
-    let chainResult: { isLong: boolean } = { isLong: false };
-    typeChain.then((value) => {
-      chainResult = value;
-    });
-    this.assertEqual(this.___(), chainResult.isLong);
+    const chainResult: { isLong: boolean } = await typeChain;
+    this.assertEqual(true, chainResult.isLong);
   }
 
   /**
@@ -113,7 +87,7 @@ export class AboutAsyncAwait extends Koan {
    * Understanding how errors propagate through promise chains and how to
    * handle them effectively is crucial for robust applications.
    */
-  test_promise_error_handling(): void {
+  async test_promise_error_handling(): Promise<void> {
     // Basic error catching
     const throwingPromise = Promise.resolve("start")
       .then(() => {
@@ -122,11 +96,8 @@ export class AboutAsyncAwait extends Koan {
       .catch((err) => `Caught: ${err.message}`)
       .then((result) => `Final: ${result}`);
 
-    let errorResult = "";
-    throwingPromise.then((value) => {
-      errorResult = value;
-    });
-    this.assertEqual(this.___(), errorResult); // What's the final result?
+    const errorResult = await throwingPromise;
+    this.assertEqual("Final: Caught: Something went wrong", errorResult); // What's the final result?
 
     // Errors skip .then() handlers until caught
     let step1Called = false;
@@ -134,7 +105,7 @@ export class AboutAsyncAwait extends Koan {
     let catchCalled = false;
     let finalCalled = false;
 
-    Promise.reject("initial error")
+    await Promise.reject("initial error")
       .then(() => {
         step1Called = true;
         return "step 1";
@@ -152,10 +123,10 @@ export class AboutAsyncAwait extends Koan {
         return result;
       });
 
-    this.assertEqual(this.___(), step1Called); // Did step 1 run?
-    this.assertEqual(this.___(), step2Called); // Did step 2 run?
-    this.assertEqual(this.___(), catchCalled); // Did catch run?
-    this.assertEqual(this.___(), finalCalled); // Did final then run?
+    this.assertEqual(false, step1Called); // Did step 1 run?
+    this.assertEqual(false, step2Called); // Did step 2 run?
+    this.assertEqual(true, catchCalled); // Did catch run?
+    this.assertEqual(true, finalCalled); // Did final then run?
 
     // Multiple error handling strategies
     function parseJSON(jsonString: string): Promise<any> {
@@ -169,37 +140,35 @@ export class AboutAsyncAwait extends Koan {
       });
     }
 
-    let validResult: any = null;
+    const validResult = await parseJSON('{"name": "Alice"}');
     let invalidResult: string = "";
 
-    parseJSON('{"name": "Alice"}').then((data) => {
-      validResult = data;
-    });
+    try {
+      await parseJSON("invalid json");
+    } catch (err) {
+      invalidResult = (err as Error).message;
+    }
 
-    parseJSON("invalid json").catch((err) => {
-      invalidResult = err.message;
-    });
-
-    this.assertEqual(this.___(), validResult?.name); // What name was parsed?
-    this.assertEqual(this.___(), invalidResult.includes("Invalid JSON")); // Does error message contain expected text?
+    this.assertEqual("Alice", validResult?.name); // What name was parsed?
+    this.assertEqual(true, invalidResult.includes("Invalid JSON")); // Does error message contain expected text?
 
     // Promise.finally() for cleanup - always runs
     let cleanupCount = 0;
 
-    const successfulCleanup = Promise.resolve("success")
+    const successfulCleanup = await Promise.resolve("success")
       .finally(() => {
         cleanupCount++;
       })
       .then((result) => result);
 
-    const failedCleanup = Promise.reject("error")
+    const failedCleanup = await Promise.reject("error")
       .finally(() => {
         cleanupCount++;
       })
       .catch((err) => `handled: ${err}`);
 
     // Both promises will increment cleanup counter
-    this.assertEqual(this.__(), cleanupCount); // How many times did finally run?
+    this.assertEqual(2, cleanupCount); // How many times did finally run?
   }
 
   /**
@@ -208,7 +177,7 @@ export class AboutAsyncAwait extends Koan {
    * Understanding the difference between Promise chains and async/await syntax
    * helps you choose the right approach for different scenarios.
    */
-  test_async_await_vs_promises(): void {
+  async test_async_await_vs_promises(): Promise<void> {
     // Promise chain approach
     function fetchUserDataWithPromises(userId: string): Promise<string> {
       return Promise.resolve(`user-${userId}`)
@@ -234,18 +203,11 @@ export class AboutAsyncAwait extends Koan {
       return `User: ${user.profile}, Settings: ${settings.settings}`;
     }
 
-    let promiseChainResult = "";
-    let asyncAwaitResult = "";
-
-    fetchUserDataWithPromises("123").then((result) => {
-      promiseChainResult = result;
-    });
-    fetchUserDataWithAsync("123").then((result) => {
-      asyncAwaitResult = result;
-    });
+    const promiseChainResult = await fetchUserDataWithPromises("123");
+    const asyncAwaitResult = await fetchUserDataWithAsync("123");
 
     // Both approaches should produce the same result
-    this.assertEqual(this.___(), promiseChainResult === asyncAwaitResult);
+    this.assertEqual(true, promiseChainResult === asyncAwaitResult);
 
     // Error handling comparison
     function handleErrorsWithPromises(): Promise<string> {
@@ -267,18 +229,11 @@ export class AboutAsyncAwait extends Koan {
       }
     }
 
-    let promiseErrorResult = "";
-    let asyncErrorResult = "";
+    const promiseErrorResult = await handleErrorsWithPromises();
+    const asyncErrorResult = await handleErrorsWithAsync();
 
-    handleErrorsWithPromises().then((result) => {
-      promiseErrorResult = result;
-    });
-    handleErrorsWithAsync().then((result) => {
-      asyncErrorResult = result;
-    });
-
-    this.assertEqual(this.___(), promiseErrorResult.includes("Promise caught"));
-    this.assertEqual(this.___(), asyncErrorResult.includes("Async caught"));
+    this.assertEqual(true, promiseErrorResult.includes("Promise caught"));
+    this.assertEqual(true, asyncErrorResult.includes("Async caught"));
 
     // Concurrent operations - Promises vs async/await
     async function sequentialAsync(): Promise<number> {
@@ -297,19 +252,12 @@ export class AboutAsyncAwait extends Koan {
       return first + second + third;
     }
 
-    let sequentialResult = 0;
-    let parallelResult = 0;
-
-    sequentialAsync().then((result) => {
-      sequentialResult = result;
-    });
-    parallelAsync().then((result) => {
-      parallelResult = result;
-    });
+    const sequentialResult = await sequentialAsync();
+    const parallelResult = await parallelAsync();
 
     // Both should have the same final result
-    this.assertEqual(this.___(), sequentialResult);
-    this.assertEqual(this.__(), parallelResult);
+    this.assertEqual(60, sequentialResult);
+    this.assertEqual(60, parallelResult);
 
     // Async function always returns a Promise
     async function returnNumber(): Promise<number> {
@@ -324,8 +272,8 @@ export class AboutAsyncAwait extends Koan {
     const stringResult = returnPromise();
 
     // What type do async functions always return?
-    this.assertEqual(this.___(), numResult.constructor.name);
-    this.assertEqual(this.___(), stringResult.constructor.name);
+    this.assertEqual("Promise", numResult.constructor.name);
+    this.assertEqual("Promise", stringResult.constructor.name);
   }
 
   /**
@@ -334,42 +282,39 @@ export class AboutAsyncAwait extends Koan {
    * Different Promise static methods solve different concurrency problems.
    * Understanding when to use each pattern is key to building efficient apps.
    */
-  test_promise_concurrency_patterns(): void {
+  async test_promise_concurrency_patterns(): Promise<void> {
     // Promise.all() - All must succeed, fail fast on first error
     const promise1 = Promise.resolve("Task 1 done");
     const promise2 = Promise.resolve("Task 2 done");
     const promise3 = Promise.resolve("Task 3 done");
 
-    let allResults: string[] = [];
-    Promise.all([promise1, promise2, promise3]).then((results) => {
-      allResults = results;
-    });
+    const allResults = await Promise.all([promise1, promise2, promise3]);
 
-    this.assertEqual(this.___(), allResults.length); // How many results?
-    this.assertEqual(this.___(), allResults[1]); // What's the second result?
+    this.assertEqual(3, allResults.length); // How many results?
+    this.assertEqual("Task 2 done", allResults[1]); // What's the second result?
 
     // Promise.all() with mixed success/failure
     const successTask = Promise.resolve("success");
     const failingTask = Promise.reject("failed");
     const anotherTask = Promise.resolve("another");
 
-    let allSettledResults: PromiseSettledResult<string>[] = [];
-    let allFailedResults: string = "";
-
     // Promise.allSettled() - Wait for all, regardless of success/failure
-    Promise.allSettled([successTask, failingTask, anotherTask]).then(
-      (results) => {
-        allSettledResults = results;
-      }
-    );
+    const allSettledResults = await Promise.allSettled([
+      successTask,
+      failingTask,
+      anotherTask,
+    ]);
 
     // Promise.all() - Fails if any promise fails
-    Promise.all([successTask, failingTask, anotherTask]).catch((error) => {
-      allFailedResults = error;
-    });
+    let allFailedResults: string = "";
+    try {
+      await Promise.all([successTask, failingTask, anotherTask]);
+    } catch (error) {
+      allFailedResults = error as string;
+    }
 
-    this.assertEqual(this.___(), allSettledResults.length); // How many settled results?
-    this.assertEqual(this.___(), allFailedResults); // What error was caught?
+    this.assertEqual(3, allSettledResults.length); // How many settled results?
+    this.assertEqual("failed", allFailedResults); // What error was caught?
 
     // Promise.race() - First to finish wins
     const slowTask = new Promise<string>((resolve) => {
@@ -382,12 +327,9 @@ export class AboutAsyncAwait extends Koan {
       resolve("medium");
     });
 
-    let raceWinner = "";
-    Promise.race([slowTask, fastTask, mediumTask]).then((winner) => {
-      raceWinner = winner;
-    });
+    const raceWinner = await Promise.race([slowTask, fastTask, mediumTask]);
 
-    this.assertEqual(this.___(), raceWinner); // Which one won the race?
+    this.assertEqual("fast", raceWinner); // Which one won the race?
 
     // Real-world example: API with timeout
     function fetchWithTimeout<T>(
@@ -406,17 +348,16 @@ export class AboutAsyncAwait extends Koan {
     let timedResult = "";
     let timeoutError = "";
 
-    fetchWithTimeout(apiCall, 5000)
-      .then((result) => {
-        timedResult = result.data;
-      })
-      .catch((error) => {
-        timeoutError = error.message;
-      });
+    try {
+      const result = await fetchWithTimeout(apiCall, 5000);
+      timedResult = result.data;
+    } catch (error) {
+      timeoutError = (error as Error).message;
+    }
 
     // Since apiCall resolves immediately, it should win the race
-    this.assertEqual(this.___(), timedResult);
-    this.assertEqual(this.___(), timeoutError); // Should be empty since no timeout
+    this.assertEqual("API response", timedResult);
+    this.assertEqual("", timeoutError); // Should be empty since no timeout
 
     // Parallel vs Sequential execution patterns
     async function processItemsSequentially(
@@ -435,23 +376,13 @@ export class AboutAsyncAwait extends Koan {
       return Promise.all(promises);
     }
 
-    let sequentialResults: number[] = [];
-    let parallelResults: number[] = [];
-
-    processItemsSequentially([1, 2, 3]).then((results) => {
-      sequentialResults = results;
-    });
-    processItemsInParallel([1, 2, 3]).then((results) => {
-      parallelResults = results;
-    });
+    const sequentialResults = await processItemsSequentially([1, 2, 3]);
+    const parallelResults = await processItemsInParallel([1, 2, 3]);
 
     // Both should produce the same results
-    this.assertEqual(this.___(), sequentialResults[0]); // First sequential result?
-    this.assertEqual(this.___(), parallelResults[2]); // Third parallel result?
-    this.assertEqual(
-      this.___(),
-      sequentialResults.length === parallelResults.length
-    );
+    this.assertEqual(2, sequentialResults[0]); // First sequential result?
+    this.assertEqual(6, parallelResults[2]); // Third parallel result?
+    this.assertEqual(true, sequentialResults.length === parallelResults.length);
   }
 
   /**
@@ -460,7 +391,7 @@ export class AboutAsyncAwait extends Koan {
    * Common async patterns you'll encounter in real applications.
    * These examples focus on practical scenarios and useful techniques.
    */
-  test_real_world_async_patterns(): void {
+  async test_real_world_async_patterns(): Promise<void> {
     // Retry pattern with exponential backoff
     async function retryWithBackoff<T>(
       operation: () => Promise<T>,
@@ -497,13 +428,10 @@ export class AboutAsyncAwait extends Koan {
       return "Success after retries!";
     };
 
-    let retryResult = "";
-    retryWithBackoff(unstableOperation).then((result) => {
-      retryResult = result;
-    });
+    const retryResult = await retryWithBackoff(unstableOperation);
 
-    this.assertEqual(this.___(), retryResult);
-    this.assertEqual(this.___(), attemptCount); // How many attempts were made?
+    this.assertEqual("Success after retries!", retryResult);
+    this.assertEqual(3, attemptCount); // How many attempts were made?
 
     // Caching async results
     class AsyncCache<K, V> {
@@ -542,20 +470,13 @@ export class AboutAsyncAwait extends Koan {
       return `Data for ${id}`;
     };
 
-    let firstCall = "";
-    let secondCall = "";
-
     // Both calls should use the same cached promise
-    cache.get("user1", mockFetch).then((result) => {
-      firstCall = result;
-    });
-    cache.get("user1", mockFetch).then((result) => {
-      secondCall = result;
-    });
+    const firstCall = await cache.get("user1", mockFetch);
+    const secondCall = await cache.get("user1", mockFetch);
 
-    this.assertEqual(this.___(), fetchCallCount); // How many times was fetch called?
-    this.assertEqual(this.___(), firstCall); // What data was returned?
-    this.assertEqual(this.___(), firstCall === secondCall); // Same result?
+    this.assertEqual(1, fetchCallCount); // How many times was fetch called?
+    this.assertEqual("Data for user1", firstCall); // What data was returned?
+    this.assertEqual(true, firstCall === secondCall); // Same result?
 
     // Batch processing with concurrency limit
     async function processBatch<T, R>(
@@ -578,13 +499,10 @@ export class AboutAsyncAwait extends Koan {
     const numbers = [1, 2, 3, 4, 5, 6, 7];
     const doubler = async (n: number): Promise<number> => n * 2;
 
-    let batchResults: number[] = [];
-    processBatch(numbers, doubler, 3).then((results) => {
-      batchResults = results;
-    });
+    const batchResults = await processBatch(numbers, doubler, 3);
 
-    this.assertEqual(this.___(), batchResults.length); // How many results?
-    this.assertEqual(this.___(), batchResults[3]); // What's the 4th result (index 3)?
+    this.assertEqual(7, batchResults.length); // How many results?
+    this.assertEqual(8, batchResults[3]); // What's the 4th result (index 3)?
 
     // Async validation with early termination
     async function validateAsync<T>(
@@ -614,14 +532,14 @@ export class AboutAsyncAwait extends Koan {
       return user.email.includes("@") ? null : "Invalid email format";
     };
 
-    let validationResult = { isValid: true, errors: [] as string[] };
-    validateAsync(user, [nameValidator, emailValidator]).then((result) => {
-      validationResult = result;
-    });
+    const validationResult = await validateAsync(user, [
+      nameValidator,
+      emailValidator,
+    ]);
 
-    this.assertEqual(this.___(), validationResult.isValid); // Is the user valid?
-    this.assertEqual(this.___(), validationResult.errors.length); // How many errors?
-    this.assertEqual(this.___(), validationResult.errors[0]); // What's the first error?
+    this.assertEqual(false, validationResult.isValid); // Is the user valid?
+    this.assertEqual(2, validationResult.errors.length); // How many errors?
+    this.assertEqual("Name is required", validationResult.errors[0]); // What's the first error?
 
     // Async pipeline with transformation
     class AsyncPipeline<T> {
@@ -648,12 +566,9 @@ export class AboutAsyncAwait extends Koan {
       return await step4.getValue();
     }
 
-    let pipelineResult = "";
-    createPipeline().then((result: string) => {
-      pipelineResult = result;
-    });
+    const pipelineResult = await createPipeline();
 
-    this.assertEqual(this.___(), pipelineResult);
+    this.assertEqual("Result: 13", pipelineResult);
 
     // Async factory with dependency injection
     class AsyncFactory {
@@ -692,12 +607,12 @@ export class AboutAsyncAwait extends Koan {
     let createdServices: string[] = [];
 
     // Create services with dependencies
-    factory.create("database", async () => {
+    await factory.create("database", async () => {
       createdServices.push("database");
       return { type: "database" };
     });
 
-    factory.create(
+    await factory.create(
       "cache",
       async () => {
         createdServices.push("cache");
@@ -706,7 +621,7 @@ export class AboutAsyncAwait extends Koan {
       ["database"]
     );
 
-    factory.create(
+    await factory.create(
       "api",
       async () => {
         createdServices.push("api");
@@ -716,7 +631,7 @@ export class AboutAsyncAwait extends Koan {
     );
 
     // The factory should handle dependency ordering
-    this.assertEqual(this.___(), createdServices[0]); // What service was created first?
-    this.assertEqual(this.___(), createdServices.length); // How many services total?
+    this.assertEqual("database", createdServices[0]); // What service was created first?
+    this.assertEqual(3, createdServices.length); // How many services total?
   }
 }

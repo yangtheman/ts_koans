@@ -64,9 +64,9 @@ export class AboutStrings extends Koan {
     const focusEvent = createEvent("focus");
 
     this.assertEqual(this.___(), currentTheme);
-    this.assertEqual("Theme set to dark", themeMessage);
+    this.assertEqual(this.___(), themeMessage);
     this.assertEqual(this.___(), requestMethod);
-    this.assertEqual("onClick", clickEvent);
+    this.assertEqual(this.___(), clickEvent);
     this.assertEqual(this.___(), focusEvent);
 
     // Type narrowing with string literals
@@ -171,7 +171,7 @@ export class AboutStrings extends Koan {
     this.assertEqual(this.___(), userInfo.includes("28"));
     this.assertEqual(true, isAdult.includes("Adult"));
     this.assertEqual(this.___(), nameLength.split(" ")[2]); // "Alice Johnson".length
-    this.assertEqual("ROLE: SENIOR DEVELOPER", roleUpper);
+    this.assertEqual(this.___(), roleUpper);
     this.assertEqual(this.___(), 66); // (28 * 2) + 10
     this.assertEqual(true, comparison.includes("Experienced"));
     this.assertEqual(this.___(), dateMessage.includes("January"));
@@ -216,7 +216,7 @@ export class AboutStrings extends Koan {
       .join(" ");
 
     this.assertEqual(this.___(), cleanText);
-    this.assertEqual("HELLO, TYPESCRIPT WORLD!", upperText);
+    this.assertEqual(this.___(), upperText);
     this.assertEqual(this.___(), lowerText);
     this.assertEqual(this.___(), titleCase);
 
@@ -230,9 +230,9 @@ export class AboutStrings extends Koan {
     const endsWithScript = searchText.endsWith("Script");
 
     this.assertEqual(this.__(), firstScript);
-    this.assertEqual(48, lastScript); // Position of 'Script' in 'JavaScript'
+    this.assertEqual(this.___(), lastScript); // Position of 'Script' in 'JavaScript'
     this.assertEqual(this.___(), includesTyped);
-    this.assertEqual(true, startsWithThe);
+    this.assertEqual(this.___(), startsWithThe);
     this.assertEqual(this.___(), endsWithScript);
 
     // String extraction and slicing
@@ -244,9 +244,9 @@ export class AboutStrings extends Koan {
     const charCodeAt = text.charCodeAt(4); // ASCII code for 'S'
 
     this.assertEqual(this.___(), substring);
-    this.assertEqual("Type", slice);
+    this.assertEqual(this.___(), slice);
     this.assertEqual(this.___(), sliceNegative);
-    this.assertEqual("S", charAt);
+    this.assertEqual(this.___(), charAt);
     this.assertEqual(this.__(), charCodeAt); // ASCII code for 'S' is 83
 
     // String splitting with different patterns
@@ -255,11 +255,11 @@ export class AboutStrings extends Koan {
     const phoneDigits = phoneNumber.replace(/\D/g, ""); // Remove non-digits
     const htmlText = htmlContent.replace(/<[^>]*>/g, ""); // Remove HTML tags
 
-    this.assertEqual(3, emails.length);
+    this.assertEqual(this.___(), emails.length);
     this.assertEqual(this.___(), emails[0]);
-    this.assertEqual("charlie@demo.net", emails[2]);
+    this.assertEqual(this.___(), emails[2]);
     this.assertEqual(this.___(), lines.length);
-    this.assertEqual("15551234567", phoneDigits);
+    this.assertEqual(this.___(), phoneDigits);
     this.assertEqual(this.___(), htmlText);
 
     // Advanced string transformations
@@ -271,7 +271,7 @@ export class AboutStrings extends Koan {
       .sort()
       .join("");
 
-    this.assertEqual(9, words.length);
+    this.assertEqual(this.___(), words.length);
     this.assertEqual(this.___(), reversedWords.startsWith("dog"));
     this.assertEqual(
       "The Quick Brown Fox Jumps Over The Lazy Dog",
@@ -316,7 +316,7 @@ export class AboutStrings extends Koan {
     const isInvalidEmail = emailPattern.test(invalidEmail);
 
     this.assertEqual(this.___(), isValidEmail);
-    this.assertEqual(false, isInvalidEmail);
+    this.assertEqual(this.___(), isInvalidEmail);
 
     // Phone number extraction with groups
     const phoneText = "Call me at +1 (555) 123-4567 or (555) 987-6543";
@@ -325,9 +325,9 @@ export class AboutStrings extends Koan {
     );
     const firstPhoneMatch = phoneText.match(phonePattern);
 
-    this.assertEqual(2, phoneMatches?.length || 0);
+    this.assertEqual(this.___(), phoneMatches?.length || 0);
     this.assertEqual(this.___(), firstPhoneMatch?.[1]); // First capture group (area code)
-    this.assertEqual("123", firstPhoneMatch?.[2]); // Second capture group
+    this.assertEqual(this.___(), firstPhoneMatch?.[2]); // Second capture group
     this.assertEqual(this.___(), firstPhoneMatch?.[3]); // Third capture group
 
     // URL validation and parsing
@@ -349,7 +349,7 @@ export class AboutStrings extends Koan {
     const links = htmlText.match(/href="([^"]*)"/g);
 
     this.assertEqual(this.___(), textOnly);
-    this.assertEqual(1, links?.length || 0);
+    this.assertEqual(this.___(), links?.length || 0);
 
     // Advanced pattern matching
     const logLine =
@@ -359,9 +359,9 @@ export class AboutStrings extends Koan {
     const logMatch = logLine.match(logPattern);
 
     this.assertEqual(this.___(), logMatch?.[1]); // Date/time
-    this.assertEqual("ERROR", logMatch?.[2]); // Log level
+    this.assertEqual(this.___(), logMatch?.[2]); // Log level
     this.assertEqual(this.___(), logMatch?.[3]); // Message
-    this.assertEqual("12345", logMatch?.[4]); // Connection ID
+    this.assertEqual(this.___(), logMatch?.[4]); // Connection ID
   }
 
   /**
@@ -397,7 +397,7 @@ export class AboutStrings extends Koan {
     const simpleEmoji = "😀";
 
     this.assertEqual(this.___(), emoji.length); // UTF-16 code units, not visual chars
-    this.assertEqual(2, simpleEmoji.length); // Still 2 due to surrogate pairs
+    this.assertEqual(this.___(), simpleEmoji.length); // Still 2 due to surrogate pairs
     this.assertEqual(this.___(), complexEmoji.length); // Composite emoji
 
     // Character code handling
@@ -408,9 +408,9 @@ export class AboutStrings extends Koan {
     const fromCodePoint = String.fromCodePoint(0x1f44d); // 👍
 
     this.assertEqual(this.__(), charCodeA);
-    this.assertEqual(65, codePointA || 0);
+    this.assertEqual(this.___(), codePointA || 0);
     this.assertEqual(this.___(), fromCharCode);
-    this.assertEqual("👍", fromCodePoint);
+    this.assertEqual(this.___(), fromCodePoint);
 
     // Text normalization
     const accented1 = "café"; // Single character é
@@ -419,8 +419,8 @@ export class AboutStrings extends Koan {
     const normalized2 = accented2.normalize("NFC");
 
     this.assertEqual(this.___(), accented1.length === accented2.length); // Different representations
-    this.assertEqual(true, normalized1 === normalized2); // Same after normalization
-    this.assertEqual(4, normalized1.length);
+    this.assertEqual(this.___(), normalized1 === normalized2); // Same after normalization
+    this.assertEqual(this.___(), normalized1.length);
 
     // Locale-aware operations
     const names = ["Åse", "Zebra", "Älice", "Bob"];
@@ -433,7 +433,7 @@ export class AboutStrings extends Koan {
     const turkishLowerLocale = turkish.toLocaleLowerCase("tr-TR");
 
     this.assertEqual(this.___(), sortedEnglish[0]); // English sort order
-    this.assertEqual("Älice", sortedSwedish[0]); // Swedish sort order
+    this.assertEqual(this.___(), sortedSwedish[0]); // Swedish sort order
     this.assertEqual(this.___(), turkishLower !== turkishLowerLocale); // Different results
 
     // Working with surrogate pairs
@@ -442,7 +442,7 @@ export class AboutStrings extends Koan {
     const properLength = symbolArray.length;
 
     this.assertEqual(this.___(), mathSymbol.length > properLength); // More code units than chars
-    this.assertEqual(10, properLength); // Actual character count
+    this.assertEqual(this.___(), properLength); // Actual character count
   }
 
   /**
@@ -521,9 +521,9 @@ export class AboutStrings extends Koan {
     }
 
     const parsed = parseCSV(csvData);
-    this.assertEqual(3, parsed.length);
+    this.assertEqual(this.___(), parsed.length);
     this.assertEqual(this.___(), parsed[0].name);
-    this.assertEqual("30", parsed[0].age);
+    this.assertEqual(this.___(), parsed[0].age);
     this.assertEqual(this.___(), parsed[1].notes.includes("Regular"));
 
     // Template processing engine
@@ -576,7 +576,7 @@ export class AboutStrings extends Koan {
     });
 
     this.assertEqual(this.___(), processed1);
-    this.assertEqual("Hello Bob, you have 3 notifications!", processed2);
+    this.assertEqual(this.___(), processed2);
 
     // Text analysis and metrics
     const article = `
@@ -613,9 +613,9 @@ export class AboutStrings extends Koan {
     const analysis = analyzeText(article);
 
     this.assertEqual(this.___(), analysis.wordCount > 30);
-    this.assertEqual(3, analysis.sentenceCount);
+    this.assertEqual(this.___(), analysis.sentenceCount);
     this.assertEqual(this.___(), analysis.averageWordsPerSentence);
-    this.assertEqual("is", analysis.mostFrequentWord[0]);
-    this.assertEqual(3, analysis.mostFrequentWord[1]); // Appears three times
+    this.assertEqual(this.___(), analysis.mostFrequentWord[0]);
+    this.assertEqual(this.___(), analysis.mostFrequentWord[1]); // Appears three times
   }
 }

@@ -37,9 +37,9 @@ export class AboutObjects extends Koan {
     };
 
     this.assertEqual(this.___(), person.name);
-    this.assertEqual(30, person.age);
-    this.assertEqual("New York", person.city);
-    this.assertEqual("value with spaces", person["special-key"]);
+    this.assertEqual(this.___(), person.age);
+    this.assertEqual(this.___(), person.city);
+    this.assertEqual(this.___(), person["special-key"]);
     this.assertEqual(this.___(), person[123]); // Accessing numeric key
 
     // Dynamic property access
@@ -55,18 +55,18 @@ export class AboutObjects extends Koan {
       [`${prefix}_email`]: "bob@example.com",
     };
 
-    this.assertEqual("Bob", dynamicObject.userName);
+    this.assertEqual(this.___(), dynamicObject.userName);
     this.assertEqual(this.___(), dynamicObject.userAge);
-    this.assertEqual("bob@example.com", dynamicObject.user_email);
+    this.assertEqual(this.___(), dynamicObject.user_email);
 
     // Property shorthand (when variable name matches property name)
     const name = "Charlie";
     const age = 35;
     const shorthandObject = { name, age, city: "Boston" }; // name: name, age: age
 
-    this.assertEqual("Charlie", shorthandObject.name);
+    this.assertEqual(this.___(), shorthandObject.name);
     this.assertEqual(this.___(), shorthandObject.age);
-    this.assertEqual("Boston", shorthandObject.city);
+    this.assertEqual(this.___(), shorthandObject.city);
 
     // Method definitions (ES6+ syntax)
     const calculator = {
@@ -104,7 +104,7 @@ export class AboutObjects extends Koan {
       regularProperty: "regular value",
     };
 
-    this.assertEqual("symbol value 1", symbolObject[sym1]);
+    this.assertEqual(this.___(), symbolObject[sym1]);
     this.assertEqual(this.___(), symbolObject[sym2]);
 
     // Symbols are always unique, even with same description
@@ -180,7 +180,7 @@ export class AboutObjects extends Koan {
     calculator.multiply(3);
     this.assertEqual(this.___(), calculator.result);
     calculator.reset();
-    this.assertEqual(0, calculator.result);
+    this.assertEqual(this.___(), calculator.result);
 
     // Method chaining - need to reset first
     calculator.reset();
@@ -236,7 +236,7 @@ export class AboutObjects extends Koan {
     const result2 = multiplyBy.call(obj2, 3, 1); // (20 * 3) + 1
 
     this.assertEqual(this.___(), result1);
-    this.assertEqual(61, result2);
+    this.assertEqual(this.___(), result2);
 
     // apply() - invoke with specific 'this' and arguments array
     const result3 = multiplyBy.apply(obj1, [4, 2]); // (10 * 4) + 2
@@ -345,7 +345,7 @@ export class AboutObjects extends Koan {
     const { pages: pageCount } = book; // Rename during destructuring
 
     this.assertEqual(this.___(), title);
-    this.assertEqual("Microsoft", author);
+    this.assertEqual(this.___(), author);
     this.assertEqual(this.___(), pageCount);
 
     // Default values for missing properties (using type assertion for demonstration)
@@ -360,9 +360,9 @@ export class AboutObjects extends Koan {
       language = "English",
     } = bookWithOptionals;
 
-    this.assertEqual("Not available", isbn);
+    this.assertEqual(this.___(), isbn);
     this.assertEqual(this.___(), edition);
-    this.assertEqual("English", language);
+    this.assertEqual(this.___(), language);
 
     // Nested destructuring
     const {
@@ -370,17 +370,17 @@ export class AboutObjects extends Koan {
       reviews: [firstReview, secondReview],
     } = book;
 
-    this.assertEqual("Microsoft Press", publisherName);
+    this.assertEqual(this.___(), publisherName);
     this.assertEqual(this.___(), publisherLocation);
-    this.assertEqual(5, firstReview.rating);
+    this.assertEqual(this.___(), firstReview.rating);
     this.assertEqual(this.___(), secondReview.comment);
 
     // Rest operator to collect remaining properties
     const { title: bookTitle, author: bookAuthor, ...otherProperties } = book;
 
-    this.assertEqual("TypeScript Handbook", bookTitle);
+    this.assertEqual(this.___(), bookTitle);
     this.assertEqual(this.___(), Object.keys(otherProperties).length);
-    this.assertEqual(true, "pages" in otherProperties);
+    this.assertEqual(this.___(), "pages" in otherProperties);
     this.assertEqual(this.___(), "title" in otherProperties);
 
     // Destructuring in function parameters
@@ -410,7 +410,7 @@ export class AboutObjects extends Koan {
     let b = 2;
     [a, b] = [b, a]; // Array destructuring for swapping
 
-    this.assertEqual(2, a);
+    this.assertEqual(this.___(), a);
     this.assertEqual(this.___(), b);
 
     // Destructuring in loops
@@ -425,9 +425,9 @@ export class AboutObjects extends Koan {
       roles.push(`${name}: ${role}`);
     }
 
-    this.assertEqual(3, roles.length);
+    this.assertEqual(this.___(), roles.length);
     this.assertEqual(this.___(), roles[0]);
-    this.assertEqual("Charlie: Manager", roles[2]);
+    this.assertEqual(this.___(), roles[2]);
 
     // Mixed destructuring with arrays and objects
     const complexData = {
@@ -449,11 +449,11 @@ export class AboutObjects extends Koan {
       content: [{ text: headingText }, ...restContent],
     } = complexData;
 
-    this.assertEqual("1.0", version);
+    this.assertEqual(this.___(), version);
     this.assertEqual(this.___(), firstTag);
-    this.assertEqual(2, remainingTags.length);
+    this.assertEqual(this.___(), remainingTags.length);
     this.assertEqual(this.___(), headingText);
-    this.assertEqual(1, restContent.length);
+    this.assertEqual(this.___(), restContent.length);
   }
 
   /**
@@ -498,20 +498,20 @@ export class AboutObjects extends Koan {
     const entries = Object.entries(company);
 
     this.assertEqual(this.___(), company.name);
-    this.assertEqual("San Francisco", company.address.city);
+    this.assertEqual(this.___(), company.address.city);
     this.assertEqual(this.___(), company.address.state);
 
-    this.assertEqual(6, keys.length);
+    this.assertEqual(this.___(), keys.length);
     this.assertEqual(this.___(), keys.includes("employees"));
     this.assertEqual(true, keys.includes("address"));
     this.assertEqual(this.___(), keys.includes("revenue")); // Not present
 
-    this.assertEqual(6, values.length);
+    this.assertEqual(this.___(), values.length);
     this.assertEqual(this.___(), values.includes("TechCorp"));
     this.assertEqual(true, values.includes(150));
 
-    this.assertEqual(6, entries.length);
-    this.assertEqual("name", entries[0][0]); // First entry key
+    this.assertEqual(this.___(), entries.length);
+    this.assertEqual(this.___(), entries[0][0]); // First entry key
     this.assertEqual(this.___(), entries[0][1]); // First entry value
 
     // Object.fromEntries() - construct object from key-value pairs
@@ -521,9 +521,9 @@ export class AboutObjects extends Koan {
 
     const transformedObject = Object.fromEntries(transformedEntries);
 
-    this.assertEqual("TechCorp", transformedObject.NAME);
+    this.assertEqual(this.___(), transformedObject.NAME);
     this.assertEqual(this.___(), transformedObject.FOUNDED);
-    this.assertEqual(150, transformedObject.EMPLOYEES);
+    this.assertEqual(this.___(), transformedObject.EMPLOYEES);
     this.assertEqual(this.___(), "ADDRESS" in transformedObject); // Object filtered out
 
     // Object.assign() for merging and cloning
@@ -539,11 +539,11 @@ export class AboutObjects extends Koan {
       userPreferences
     );
 
-    this.assertEqual("light", finalSettings.theme); // userPreferences wins
+    this.assertEqual(this.___(), finalSettings.theme); // userPreferences wins
     this.assertEqual(this.___(), finalSettings.language); // from originalSettings
-    this.assertEqual(true, finalSettings.autoSave); // originalSettings wins over default
+    this.assertEqual(this.___(), finalSettings.autoSave); // originalSettings wins over default
     this.assertEqual(this.___(), finalSettings.notifications); // from defaultPreferences
-    this.assertEqual(14, finalSettings.fontSize); // from userPreferences
+    this.assertEqual(this.___(), finalSettings.fontSize); // from userPreferences
 
     // Shallow cloning with Object.assign
     const original = { a: 1, b: { c: 2 } };
@@ -552,10 +552,10 @@ export class AboutObjects extends Koan {
     cloned.a = 10;
     cloned.b.c = 20; // Modifies original's nested object (shallow clone!)
 
-    this.assertEqual(1, original.a); // Original unchanged
+    this.assertEqual(this.___(), original.a); // Original unchanged
     this.assertEqual(this.___(), original.b.c); // Original changed (shallow!)
-    this.assertEqual(10, cloned.a);
-    this.assertEqual(20, cloned.b.c);
+    this.assertEqual(this.___(), cloned.a);
+    this.assertEqual(this.___(), cloned.b.c);
 
     // For...in loop and property enumeration
     const colors = {
@@ -578,7 +578,7 @@ export class AboutObjects extends Koan {
     this.assertEqual(this.___(), colorNames.length);
     this.assertEqual(true, colorNames.includes("red"));
     this.assertEqual(this.___(), colorNames.includes("yellow"));
-    this.assertEqual("#FF0000", colorValues[0]);
+    this.assertEqual(this.___(), colorValues[0]);
     this.assertEqual(this.___(), colorValues.includes("#00FF00"));
 
     // Object filtering and transformation
@@ -598,7 +598,7 @@ export class AboutObjects extends Koan {
 
     this.assertEqual(2, Object.keys(engineeringEmployees).length);
     this.assertEqual(this.___(), "alice" in engineeringEmployees);
-    this.assertEqual(true, "charlie" in engineeringEmployees);
+    this.assertEqual(this.___(), "charlie" in engineeringEmployees);
     this.assertEqual(this.___(), "bob" in engineeringEmployees);
 
     // Transform object values
@@ -610,8 +610,8 @@ export class AboutObjects extends Koan {
     );
 
     this.assertEqual(this.___(), Math.round(salaryBonuses.alice)); // 3 years, 5% bonus
-    this.assertEqual(6500, salaryBonuses.bob); // 5 years, 10% bonus
-    this.assertEqual(8500, salaryBonuses.charlie); // 7 years, 10% bonus
+    this.assertEqual(this.___(), salaryBonuses.bob); // 5 years, 10% bonus
+    this.assertEqual(this.___(), salaryBonuses.charlie); // 7 years, 10% bonus
     this.assertEqual(this.___(), salaryBonuses.diana); // 2 years, 5% bonus
   }
 
@@ -643,12 +643,12 @@ export class AboutObjects extends Koan {
     const overridden = { ...original, b: 20, c: 30 };
 
     this.assertEqual(this.___(), Object.keys(extended).length);
-    this.assertEqual(1, extended.a);
+    this.assertEqual(this.___(), extended.a);
     this.assertEqual(this.___(), extended.c);
 
-    this.assertEqual(1, overridden.a);
+    this.assertEqual(this.___(), overridden.a);
     this.assertEqual(this.___(), overridden.b); // Overridden value
-    this.assertEqual(30, overridden.c);
+    this.assertEqual(this.___(), overridden.c);
 
     // Advanced spread patterns
     const defaults = { color: "blue", size: "medium", enabled: true };
@@ -657,9 +657,9 @@ export class AboutObjects extends Koan {
 
     const finalConfig = { ...defaults, ...userSettings, ...systemSettings };
 
-    this.assertEqual("red", finalConfig.color); // userSettings wins
+    this.assertEqual(this.___(), finalConfig.color); // userSettings wins
     this.assertEqual(this.___(), finalConfig.size); // from defaults
-    this.assertEqual(false, finalConfig.enabled); // systemSettings wins
+    this.assertEqual(this.___(), finalConfig.enabled); // systemSettings wins
     this.assertEqual(this.___(), finalConfig.fontSize); // from userSettings
 
     // Object immutability with Object.freeze()
@@ -730,10 +730,10 @@ export class AboutObjects extends Koan {
       },
     };
 
-    this.assertEqual("Alice", state.user.name); // Original unchanged
-    this.assertEqual("dark", state.user.preferences.theme); // Original unchanged
+    this.assertEqual(this.___(), state.user.name); // Original unchanged
+    this.assertEqual(this.___(), state.user.preferences.theme); // Original unchanged
     this.assertEqual(this.___(), updatedState.user.name); // Same name
-    this.assertEqual("light", updatedState.user.preferences.theme); // Updated
+    this.assertEqual(this.___(), updatedState.user.preferences.theme); // Updated
 
     // Object.seal() - allows modification but prevents addition/deletion
     const sealedObject = Object.seal({ a: 1, b: 2 });
@@ -747,7 +747,7 @@ export class AboutObjects extends Koan {
     }
 
     this.assertEqual(this.___(), sealedObject.a); // Modified
-    this.assertEqual(2, sealedObject.b); // Not deleted
+    this.assertEqual(this.___(), sealedObject.b); // Not deleted
     this.assertEqual(this.___(), "c" in sealedObject); // Not added
 
     // Object factory pattern
@@ -766,9 +766,9 @@ export class AboutObjects extends Koan {
     const user1 = createUser("Alice", "alice@example.com");
     const user2 = user1.updateEmail("alice.smith@example.com");
 
-    this.assertEqual("Alice", user1.name);
+    this.assertEqual(this.___(), user1.name);
     this.assertEqual(this.___(), user1.email);
-    this.assertEqual("Alice", user2.name);
+    this.assertEqual(this.___(), user2.name);
     this.assertEqual(this.___(), user2.email);
     this.assertEqual(true, user1.getId() !== user2.getId()); // Different objects
 
@@ -826,6 +826,6 @@ export class AboutObjects extends Koan {
     auditedObject.value = 100; // Triggers set trap
 
     this.assertEqual(this.___(), auditedObject.name);
-    this.assertEqual(100, auditedObject.value);
+    this.assertEqual(this.___(), auditedObject.value);
   }
 }

@@ -69,7 +69,7 @@ export class AboutAdvancedTypes extends Koan {
     type BorderRadius = CSSPropertyName<"borderRadius">; // '-border-radius'
 
     this.assertEqual(this.___(), userParams.userId);
-    this.assertEqual("456", userParams.postId);
+    this.assertEqual(this.___(), userParams.postId);
     this.assertEqual(this.___(), query.includes("SELECT"));
     this.assertEqual(true, query.includes("WHERE"));
 
@@ -84,7 +84,7 @@ export class AboutAdvancedTypes extends Koan {
     const endpoint: UserEndpoint = "/api/v2/users";
 
     this.assertEqual(this.___(), endpoint.includes("v2"));
-    this.assertEqual("/api/v2/users", endpoint);
+    this.assertEqual(this.___(), endpoint);
   }
 
   /**
@@ -181,12 +181,12 @@ export class AboutAdvancedTypes extends Koan {
     const pathExample: ConfigPaths = "database.credentials.username";
 
     this.assertEqual(this.___(), partialConfig.database?.host);
-    this.assertEqual("admin", partialConfig.database?.credentials?.username);
+    this.assertEqual(this.___(), partialConfig.database?.credentials?.username);
     this.assertEqual(this.___(), partialConfig.database?.credentials?.password);
 
-    this.assertEqual("prod-host", readonlyConfig.database.host);
+    this.assertEqual(this.___(), readonlyConfig.database.host);
     this.assertEqual(this.___(), readonlyConfig.database.port);
-    this.assertEqual(true, readonlyConfig.cache.enabled);
+    this.assertEqual(this.___(), readonlyConfig.cache.enabled);
 
     this.assertEqual(this.___(), pathExample.includes("database"));
     this.assertEqual(true, pathExample.includes("username"));
@@ -223,7 +223,7 @@ export class AboutAdvancedTypes extends Koan {
     };
 
     this.assertEqual(this.___(), fileSystem.value);
-    this.assertEqual("src", fileSystem.children[0].value);
+    this.assertEqual(this.___(), fileSystem.children[0].value);
     this.assertEqual(this.___(), fileSystem.children[0].children[0].value);
     this.assertEqual(
       2,
@@ -305,9 +305,9 @@ export class AboutAdvancedTypes extends Koan {
       isAsync: true,
     };
 
-    this.assertEqual(2, analysisResult.arity);
+    this.assertEqual(this.___(), analysisResult.arity);
     this.assertEqual(this.___(), analysisResult.isAsync);
-    this.assertEqual(42, analysisResult.parameters[0]);
+    this.assertEqual(this.___(), analysisResult.parameters[0]);
     this.assertEqual(this.___(), analysisResult.parameters[1]);
 
     // Test deep extraction
@@ -329,7 +329,7 @@ export class AboutAdvancedTypes extends Koan {
     const extractedTheme: ThemeType = "dark";
 
     this.assertEqual(this.___(), extractedTheme);
-    this.assertEqual("dark", deepObject.user.profile.settings.theme);
+    this.assertEqual(this.___(), deepObject.user.profile.settings.theme);
 
     // Test tuple analysis
     const coordinates = [10, 20, 30] as const;
@@ -343,9 +343,9 @@ export class AboutAdvancedTypes extends Koan {
     };
 
     this.assertEqual(this.__(), tupleInfo.head);
-    this.assertEqual(30, tupleInfo.last);
-    this.assertEqual(3, tupleInfo.length);
-    this.assertEqual(2, tupleInfo.tail.length);
+    this.assertEqual(this.___(), tupleInfo.last);
+    this.assertEqual(this.___(), tupleInfo.length);
+    this.assertEqual(this.___(), tupleInfo.tail.length);
   }
 
   /**
@@ -445,7 +445,7 @@ export class AboutAdvancedTypes extends Koan {
     const isUnion = true; // Simulating IsUnion<string | number>
 
     this.assertEqual(this.___(), isSingle);
-    this.assertEqual(true, isUnion);
+    this.assertEqual(this.___(), isUnion);
 
     // Test boolean operations
     type TrueAndTrue = And<true, true>; // true
@@ -457,8 +457,8 @@ export class AboutAdvancedTypes extends Koan {
     const orResult = true; // Simulating Or<false, true>
 
     this.assertEqual(this.___(), andResult);
-    this.assertEqual(false, andResult2);
-    this.assertEqual(true, orResult);
+    this.assertEqual(this.___(), andResult2);
+    this.assertEqual(this.___(), orResult);
 
     // Test type validation
     const validUser = { id: 1, email: "user@example.com", name: "Alice" };
@@ -472,7 +472,7 @@ export class AboutAdvancedTypes extends Koan {
 
     this.assertEqual(this.___(), validationResult.valid);
     this.assertEqual(validUser, validationResult.data);
-    this.assertEqual(false, invalidationResult.valid);
+    this.assertEqual(this.___(), invalidationResult.valid);
     this.assertEqual(this.___(), invalidationResult.error.includes("email"));
   }
 
@@ -563,7 +563,7 @@ export class AboutAdvancedTypes extends Koan {
     };
 
     this.assertEqual(this.___(), stringProps.getName);
-    this.assertEqual("alice@example.com", stringProps.getEmail);
+    this.assertEqual(this.___(), stringProps.getEmail);
 
     // Test event handlers
     type UserEventHandlers = CreateEventHandlers<Pick<User, "name" | "email">>;
@@ -583,7 +583,7 @@ export class AboutAdvancedTypes extends Koan {
     const emailValid = handlers.validateEmail("alice@example.com");
 
     this.assertEqual(this.___(), nameValid);
-    this.assertEqual(true, emailValid);
+    this.assertEqual(this.___(), emailValid);
 
     // Test property paths
     type UserPaths = PropertyPaths<User>;
@@ -610,7 +610,7 @@ export class AboutAdvancedTypes extends Koan {
       },
     };
 
-    this.assertEqual("dark", user.profile.settings.theme);
+    this.assertEqual(this.___(), user.profile.settings.theme);
     this.assertEqual(this.___(), user.profile.bio);
   }
 
@@ -710,7 +710,7 @@ export class AboutAdvancedTypes extends Koan {
     this.assertEqual(this.___(), userId !== null);
     this.assertEqual(null, invalidUserId);
 
-    this.assertEqual(true, email !== null);
+    this.assertEqual(this.___(), email !== null);
     this.assertEqual(this.___(), invalidEmail);
 
     this.assertEqual(this.___(), password !== null);
@@ -720,9 +720,9 @@ export class AboutAdvancedTypes extends Koan {
       const user = getUserById(userId);
       const emailSent = sendEmail(email, "Welcome!");
 
-      this.assertEqual(123, user.id as number);
+      this.assertEqual(this.___(), user.id as number);
       this.assertEqual(this.___(), user.name.includes("User"));
-      this.assertEqual(true, emailSent);
+      this.assertEqual(this.___(), emailSent);
     }
 
     this.assertEqual(100.46, usdAmount as number);
@@ -882,13 +882,13 @@ export class AboutAdvancedTypes extends Koan {
       .select("id", "name", "email")
       .build();
 
-    this.assertEqual(3, query.conditionCount);
+    this.assertEqual(this.___(), query.conditionCount);
     this.assertEqual(this.___(), query.fieldCount);
-    this.assertEqual("name", query.conditions[0].field);
+    this.assertEqual(this.___(), query.conditions[0].field);
     this.assertEqual(this.___(), query.conditions[0].value);
-    this.assertEqual(">", query.conditions[1].operator);
+    this.assertEqual(this.___(), query.conditions[1].operator);
     this.assertEqual(this.__(), query.conditions[1].value);
-    this.assertEqual("in", query.conditions[2].operator);
+    this.assertEqual(this.___(), query.conditions[2].operator);
     this.assertEqual(2, (query.conditions[2].value as string[]).length);
   }
 

@@ -53,7 +53,7 @@ export class AboutFunctions extends Koan {
     }
 
     // Function declaration characteristics
-    this.assertEqual("function", typeof hoistedFunction);
+    this.assertEqual(this.___(), typeof hoistedFunction);
     this.assertEqual(this.___(), hoistedFunction.name); // "hoistedFunction"
 
     // Hoisting vs block scope
@@ -70,7 +70,7 @@ export class AboutFunctions extends Koan {
     }
 
     this.assertEqual(this.___(), namedDeclaration.name); // "namedDeclaration"
-    this.assertEqual(0, namedDeclaration.length); // Number of parameters
+    this.assertEqual(this.___(), namedDeclaration.length); // Number of parameters
   }
 
   test_function_expressions_and_timing(): void {
@@ -105,7 +105,7 @@ export class AboutFunctions extends Koan {
     };
 
     this.assertEqual(this.___(), anonymousExpr.name); // ""
-    this.assertEqual("namedFunction", namedExpr.name);
+    this.assertEqual(this.___(), namedExpr.name);
 
     // Named function expressions provide benefits:
     // - Better stack traces for debugging
@@ -117,7 +117,7 @@ export class AboutFunctions extends Koan {
     };
 
     this.assertEqual(this.___(), factorial(4)); // 24
-    this.assertEqual("fact", factorial.name);
+    this.assertEqual(this.___(), factorial.name);
 
     // Immediately Invoked Function Expression (IIFE)
     const immediateResult = (function (x: number): number {
@@ -265,7 +265,7 @@ export class AboutFunctions extends Koan {
     const user1 = createUser("Bob");
     const user2 = createUser("Alice", 25, ["admin", "user"]);
 
-    this.assertEqual("Bob", user1.name);
+    this.assertEqual(this.___(), user1.name);
     this.assertEqual(this.___(), Array.isArray(user1.roles)); // true
     this.assertEqual(["user"], user1.roles);
     this.assertEqual(this.___(), user2.roles.length); // 2
@@ -467,7 +467,7 @@ export class AboutFunctions extends Koan {
     const div1 = createElement("div");
     const div2 = createElement("div", "Hello");
 
-    this.assertEqual("DIV", div1.tagName);
+    this.assertEqual(this.___(), div1.tagName);
     this.assertEqual(this.___(), div2.textContent); // "Hello"
 
     // Generic overloads
@@ -486,9 +486,9 @@ export class AboutFunctions extends Koan {
     const numberContainer = createContainer(42);
     const objectContainer = createContainer({ key: "value" });
 
-    this.assertEqual("hello", stringContainer.value);
+    this.assertEqual(this.___(), stringContainer.value);
     this.assertEqual(this.___(), numberContainer.value); // 42
-    this.assertEqual("value", objectContainer.value.key);
+    this.assertEqual(this.___(), objectContainer.value.key);
 
     // Conditional overloads based on parameters
     function processData(data: string, format: "json"): object;
@@ -517,7 +517,7 @@ export class AboutFunctions extends Koan {
     const numberResult = processData("42.5", "number");
 
     this.assertEqual(this.___(), jsonResult.name); // "Alice"
-    this.assertEqual("HELLO", textResult);
+    this.assertEqual(this.___(), textResult);
     this.assertEqual(this.___(), numberResult); // 42.5
   }
 
@@ -809,7 +809,7 @@ export class AboutFunctions extends Koan {
     const cloned = deepClone(original);
     cloned.b.c = 999;
 
-    this.assertEqual(2, original.b.c); // Original unchanged
+    this.assertEqual(this.___(), original.b.c); // Original unchanged
     this.assertEqual(this.___(), cloned.b.c); // 999
   }
 
@@ -863,7 +863,7 @@ export class AboutFunctions extends Koan {
     }
 
     // For koan testing, we'll verify function types and basic structure
-    this.assertEqual("function", typeof processData);
+    this.assertEqual(this.___(), typeof processData);
     this.assertEqual(this.___(), typeof safeOperation); // "function"
 
     // Promise combinators and async patterns
@@ -937,15 +937,15 @@ export class AboutFunctions extends Koan {
 
     // Type verification for async functions
     this.assertEqual(this.___(), typeof parallelOperations); // "function"
-    this.assertEqual("function", typeof sequentialOperations);
-    this.assertEqual("function", typeof asyncMap);
+    this.assertEqual(this.___(), typeof sequentialOperations);
+    this.assertEqual(this.___(), typeof asyncMap);
 
     // Promise states and characteristics
     const resolvedPromise = Promise.resolve(42);
     const rejectedPromise = Promise.reject(new Error("failed"));
 
     this.assertEqual(this.___(), resolvedPromise instanceof Promise); // true
-    this.assertEqual(true, rejectedPromise instanceof Promise);
+    this.assertEqual(this.___(), rejectedPromise instanceof Promise);
 
     // Async function error propagation
     async function chainedOperations(): Promise<string> {
@@ -958,7 +958,7 @@ export class AboutFunctions extends Koan {
       }
     }
 
-    this.assertEqual("function", typeof chainedOperations);
+    this.assertEqual(this.___(), typeof chainedOperations);
   }
 
   test_function_composition_and_currying(): void {

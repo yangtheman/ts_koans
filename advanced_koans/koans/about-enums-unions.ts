@@ -37,14 +37,14 @@ export class AboutEnumsAndUnions extends Koan {
     }
 
     this.assertEqual(this.___(), Status.Pending);
-    this.assertEqual(1, Status.Approved);
+    this.assertEqual(this.___(), Status.Approved);
     this.assertEqual(this.___(), Status.Rejected);
-    this.assertEqual(3, Status.Archived);
+    this.assertEqual(this.___(), Status.Archived);
 
     // Reverse mapping - numeric enums support reverse lookup
-    this.assertEqual("Pending", Status[0]);
+    this.assertEqual(this.___(), Status[0]);
     this.assertEqual(this.___(), Status[1]);
-    this.assertEqual("Rejected", Status[2]);
+    this.assertEqual(this.___(), Status[2]);
 
     // Explicit numeric values
     enum Priority {
@@ -54,9 +54,9 @@ export class AboutEnumsAndUnions extends Koan {
       Critical = 100,
     }
 
-    this.assertEqual(1, Priority.Low);
+    this.assertEqual(this.___(), Priority.Low);
     this.assertEqual(this.___(), Priority.Medium);
-    this.assertEqual(10, Priority.High);
+    this.assertEqual(this.___(), Priority.High);
     this.assertEqual(this.___(), Priority.Critical);
 
     // Mixed auto and explicit values
@@ -67,9 +67,9 @@ export class AboutEnumsAndUnions extends Koan {
       BadGateway, // 406
     }
 
-    this.assertEqual(200, ResponseCode.Success);
+    this.assertEqual(this.___(), ResponseCode.Success);
     this.assertEqual(this.___(), ResponseCode.NotFound);
-    this.assertEqual(405, ResponseCode.ServerError);
+    this.assertEqual(this.___(), ResponseCode.ServerError);
     this.assertEqual(this.___(), ResponseCode.BadGateway);
 
     // Computed enum members
@@ -80,9 +80,9 @@ export class AboutEnumsAndUnions extends Koan {
       ReadWrite = Read | Write, // 6
     }
 
-    this.assertEqual(0, FileAccess.None);
+    this.assertEqual(this.___(), FileAccess.None);
     this.assertEqual(this.___(), FileAccess.Read);
-    this.assertEqual(4, FileAccess.Write);
+    this.assertEqual(this.___(), FileAccess.Write);
     this.assertEqual(this.___(), FileAccess.ReadWrite);
 
     // Using enums in functions
@@ -113,9 +113,9 @@ export class AboutEnumsAndUnions extends Koan {
       [Status.Archived]: "gray",
     };
 
-    this.assertEqual("yellow", statusColors[Status.Pending]);
+    this.assertEqual(this.___(), statusColors[Status.Pending]);
     this.assertEqual(this.___(), statusColors[Status.Approved]);
-    this.assertEqual("red", statusColors[Status.Rejected]);
+    this.assertEqual(this.___(), statusColors[Status.Rejected]);
 
     // Heterogeneous enums (mixed string and numeric)
     enum Mixed {
@@ -124,9 +124,9 @@ export class AboutEnumsAndUnions extends Koan {
       Unknown = 1,
     }
 
-    this.assertEqual(0, Mixed.No);
+    this.assertEqual(this.___(), Mixed.No);
     this.assertEqual(this.___(), Mixed.Yes);
-    this.assertEqual(1, Mixed.Unknown);
+    this.assertEqual(this.___(), Mixed.Unknown);
   }
 
   /**
@@ -160,9 +160,9 @@ export class AboutEnumsAndUnions extends Koan {
     }
 
     this.assertEqual(this.___(), Theme.Light);
-    this.assertEqual("dark", Theme.Dark);
+    this.assertEqual(this.___(), Theme.Dark);
     this.assertEqual(this.___(), Theme.Auto);
-    this.assertEqual("high-contrast", Theme.HighContrast);
+    this.assertEqual(this.___(), Theme.HighContrast);
 
     // String literal types
     type Direction = "north" | "south" | "east" | "west";
@@ -172,7 +172,7 @@ export class AboutEnumsAndUnions extends Koan {
     const apiCall: HttpMethod = "GET";
 
     this.assertEqual(this.___(), move);
-    this.assertEqual("GET", apiCall);
+    this.assertEqual(this.___(), apiCall);
 
     // Function with literal type parameters
     function navigate(direction: Direction): string {
@@ -206,7 +206,7 @@ export class AboutEnumsAndUnions extends Koan {
     const version: Version = "v1";
 
     this.assertEqual(this.___(), endpoint);
-    this.assertEqual("v1", version);
+    this.assertEqual(this.___(), version);
 
     // Const assertions for literal types
     const colors = ["red", "green", "blue"] as const;
@@ -222,7 +222,7 @@ export class AboutEnumsAndUnions extends Koan {
     // config properties are now literal types
 
     this.assertEqual(this.___(), colors[0]);
-    this.assertEqual("green", colors[1]);
+    this.assertEqual(this.___(), colors[1]);
     this.assertEqual(this.___(), colors.length);
 
     // Using const assertion in function returns
@@ -234,7 +234,7 @@ export class AboutEnumsAndUnions extends Koan {
     const themeOptions = getThemeOptions();
     const selectedTheme: ThemeOption = themeOptions[1];
 
-    this.assertEqual(3, themeOptions.length);
+    this.assertEqual(this.___(), themeOptions.length);
     this.assertEqual(this.___(), selectedTheme);
 
     // Branded types for stronger type safety
@@ -324,14 +324,14 @@ export class AboutEnumsAndUnions extends Koan {
 
     let value: StringOrNumber = 42;
     this.assertEqual(this.___(), value);
-    this.assertEqual("number", typeof value);
+    this.assertEqual(this.___(), typeof value);
 
     value = "Hello";
     this.assertEqual(this.___(), value);
-    this.assertEqual("string", typeof value);
+    this.assertEqual(this.___(), typeof value);
 
     let flag: BooleanOrNull = true;
-    this.assertEqual(true, flag);
+    this.assertEqual(this.___(), flag);
 
     flag = null;
     this.assertEqual(this.___(), flag);
@@ -452,9 +452,9 @@ export class AboutEnumsAndUnions extends Koan {
     const getRequest = makeRequest("GET", "/api/users");
     const deleteRequest = makeRequest("DELETE", "/api/users/1");
 
-    this.assertEqual(200, getRequest.status);
+    this.assertEqual(this.___(), getRequest.status);
     this.assertEqual(this.___(), getRequest.method);
-    this.assertEqual(404, deleteRequest.status);
+    this.assertEqual(this.___(), deleteRequest.status);
     this.assertEqual(this.___(), deleteRequest.method);
 
     // Optional chaining with union types
@@ -509,8 +509,8 @@ export class AboutEnumsAndUnions extends Koan {
     const numberArray = createArrays(42);
 
     this.assertEqual(this.___(), stringArray.length);
-    this.assertEqual(1, numberArray.length);
-    this.assertEqual("hello", stringArray[0]);
+    this.assertEqual(this.___(), numberArray.length);
+    this.assertEqual(this.___(), stringArray[0]);
     this.assertEqual(this.___(), numberArray[0]);
   }
 
@@ -663,7 +663,7 @@ export class AboutEnumsAndUnions extends Koan {
     const invalidResult = parseJSON<{ name: string }>("invalid json");
 
     this.assertEqual(this.___(), validResult.success);
-    this.assertEqual(false, invalidResult.success);
+    this.assertEqual(this.___(), invalidResult.success);
     this.assertEqual(true, handleResult(validResult).includes("Alice"));
     this.assertEqual(this.___(), handleResult(invalidResult));
 
@@ -802,7 +802,7 @@ export class AboutEnumsAndUnions extends Koan {
     this.assertEqual(this.___(), state.count);
 
     state = counterReducer(state, { type: "SUBTRACT", payload: 2 });
-    this.assertEqual(3, state.count);
+    this.assertEqual(this.___(), state.count);
 
     state = counterReducer(state, { type: "RESET" });
     this.assertEqual(this.___(), state.count);
